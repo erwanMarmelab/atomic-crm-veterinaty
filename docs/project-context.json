@@ -1,0 +1,115 @@
+{
+  "validated": true,
+  "bootstrapped": false,
+  "project_name": "Vet CRM",
+  "github_username": "",
+  "supabase_project_name": "",
+  "deploy_platform": "vercel",
+  "mode": "demo",
+  "business_context": {
+    "industry": "veterinary practice",
+    "team_size": 3,
+    "client_type": "B2C",
+    "objective": "Manage animal medical records: consultations, vaccinations with automatic reminders, and appointment scheduling"
+  },
+  "entities": [
+    {
+      "name": "contact",
+      "type": "extend",
+      "base_entity": "contact",
+      "description": "Pet owner / client. Standard fields (name, phone, email) + notes for general comments.",
+      "fields": []
+    },
+    {
+      "name": "animal",
+      "type": "create",
+      "base_entity": null,
+      "description": "The patient. Each animal belongs to one owner (contact). Medical records are organised around the animal.",
+      "fields": [
+        { "name": "name", "type": "text", "required": true },
+        { "name": "species", "type": "text", "required": true },
+        { "name": "breed", "type": "text", "required": false },
+        { "name": "date_of_birth", "type": "date", "required": false },
+        { "name": "weight_kg", "type": "number", "required": false },
+        { "name": "microchip_number", "type": "text", "required": false },
+        { "name": "status", "type": "list", "required": true, "options": ["active", "deceased", "lost"], "default": "active" },
+        { "name": "owner_id", "type": "relation", "required": true, "related_entity": "contact" }
+      ]
+    },
+    {
+      "name": "consultation",
+      "type": "create",
+      "base_entity": null,
+      "description": "A visit to the clinic. Each consultation belongs to one animal.",
+      "fields": [
+        { "name": "date", "type": "date", "required": true },
+        { "name": "reason", "type": "text", "required": true },
+        { "name": "diagnosis", "type": "text", "required": false },
+        { "name": "treatment", "type": "text", "required": false },
+        { "name": "next_appointment", "type": "date", "required": false },
+        { "name": "attachments", "type": "file", "required": false, "multiple": true, "note": "radiographs, lab results, etc." },
+        { "name": "animal_id", "type": "relation", "required": true, "related_entity": "animal" }
+      ]
+    },
+    {
+      "name": "vaccination",
+      "type": "create",
+      "base_entity": null,
+      "description": "A vaccination record linked to an animal. Tracks validity and triggers reminders.",
+      "fields": [
+        { "name": "vaccine_name", "type": "text", "required": true },
+        { "name": "administered_on", "type": "date", "required": true },
+        { "name": "validity_months", "type": "number", "required": true },
+        { "name": "expires_on", "type": "date", "required": false, "note": "computed from administered_on + validity_months" },
+        { "name": "animal_id", "type": "relation", "required": true, "related_entity": "animal" }
+      ]
+    }
+  ],
+  "pipeline_stages": [],
+  "user_roles": [
+    {
+      "name": "staff",
+      "description": "Vets and assistant — all users share the same full access",
+      "permissions": ["read", "write", "delete"]
+    }
+  ],
+  "integrations": [],
+  "ui": {
+    "language": "fr",
+    "theme": "auto",
+    "branding": {
+      "app_title": "Vet CRM",
+      "primary_color": "#4CAF7D",
+      "background_color": "#F9F9F7",
+      "font": "Inter (rounded)",
+      "logo": "generate — paw print or stethoscope icon in sage green (#4CAF7D) on off-white background, approachable and reassuring style",
+      "style_notes": "approachable, reassuring, clean — suited for a small veterinary practice"
+    },
+    "dashboard_widgets": [
+      "animals due for vaccination in the next 30 days",
+      "animals with a scheduled appointment this week"
+    ]
+  },
+  "cleanup": {
+    "entities_to_remove": ["company", "deal", "task", "tag"],
+    "features_to_disable": ["pipeline", "analytics_dashboard", "csv_import_export"]
+  },
+  "interview_progress": {
+    "domain_1": "done",
+    "domain_2": "done",
+    "domain_3": "done",
+    "domain_4": "done",
+    "domain_5": "done",
+    "domain_6": "done",
+    "domain_7": "done",
+    "domain_8": "skipped"
+  },
+  "phase_status": {
+    "spec":     { "status": "pending" },
+    "fork":     { "status": "pending" },
+    "supabase": { "status": "pending" },
+    "env":      { "status": "pending" },
+    "deploy":   { "status": "pending" }
+  },
+  "tickets": []
+}
