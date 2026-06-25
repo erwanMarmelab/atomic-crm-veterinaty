@@ -95,11 +95,7 @@ const VaccinationsDueList = ({
   );
 };
 
-const VaccinationDueItem = ({
-  vaccination,
-}: {
-  vaccination: Vaccination;
-}) => {
+const VaccinationDueItem = ({ vaccination }: { vaccination: Vaccination }) => {
   const translate = useTranslate();
   const expiresDate = new Date(vaccination.expires_on).toLocaleDateString();
 

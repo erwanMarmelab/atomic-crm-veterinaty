@@ -59,10 +59,7 @@ export const AppointmentsThisWeekWidget = () => {
         </h2>
       </div>
       <Card className="py-0">
-        <AppointmentsList
-          consultations={consultations}
-          isPending={isPending}
-        />
+        <AppointmentsList consultations={consultations} isPending={isPending} />
       </Card>
     </div>
   );
@@ -102,11 +99,7 @@ const AppointmentsList = ({
   );
 };
 
-const AppointmentItem = ({
-  consultation,
-}: {
-  consultation: Consultation;
-}) => {
+const AppointmentItem = ({ consultation }: { consultation: Consultation }) => {
   const translate = useTranslate();
   const appointmentDate = new Date(
     consultation.next_appointment!,
