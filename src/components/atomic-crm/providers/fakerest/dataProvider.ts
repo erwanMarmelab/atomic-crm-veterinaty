@@ -105,7 +105,9 @@ export const createDataProvider = ({
         return {
           ...result,
           data: result.data.map((consultation) => {
-            const animal = db.animals.find((a) => a.id === consultation.animal_id);
+            const animal = db.animals.find(
+              (a) => a.id === consultation.animal_id,
+            );
             const owner = animal
               ? db.contacts.find((c) => c.id === animal.owner_id)
               : undefined;
