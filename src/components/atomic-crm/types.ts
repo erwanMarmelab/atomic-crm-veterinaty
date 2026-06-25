@@ -133,6 +133,12 @@ export type Consultation = {
   attachments?: AttachmentNote[];
   /** Reference to the animal patient (required) */
   animal_id: Identifier;
+  /** Animal name joined from consultations_summary view */
+  animal_name?: string;
+  /** Owner first name joined from consultations_summary view */
+  owner_first_name?: string;
+  /** Owner last name joined from consultations_summary view */
+  owner_last_name?: string;
 } & Pick<RaRecord, "id">;
 
 export interface LabeledValue {

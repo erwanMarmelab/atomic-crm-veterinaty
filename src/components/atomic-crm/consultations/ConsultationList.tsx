@@ -73,6 +73,11 @@ const ConsultationListItem = ({
     >
       <div className="flex-1 min-w-0">
         <div className="font-medium">{dateLabel}</div>
+        {consultation.animal_name && (
+          <div className="text-sm font-medium text-foreground">
+            {consultation.animal_name}
+          </div>
+        )}
         <div className="text-sm text-muted-foreground">
           {consultation.reason}
         </div>

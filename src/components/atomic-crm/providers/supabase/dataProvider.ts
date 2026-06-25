@@ -39,6 +39,9 @@ const getDataProviderWithCustomMethods = () => {
       if (resource === "animals") {
         return baseDataProvider.getList("animals_summary", params);
       }
+      if (resource === "consultations") {
+        return baseDataProvider.getList("consultations_summary", params);
+      }
       if (resource === "activity_log") {
         const { data, total } = await baseDataProvider.getList(
           "activity_log",
@@ -63,6 +66,9 @@ const getDataProviderWithCustomMethods = () => {
       }
       if (resource === "animals") {
         return baseDataProvider.getOne("animals_summary", params);
+      }
+      if (resource === "consultations") {
+        return baseDataProvider.getOne("consultations_summary", params);
       }
 
       return baseDataProvider.getOne(resource, params);
