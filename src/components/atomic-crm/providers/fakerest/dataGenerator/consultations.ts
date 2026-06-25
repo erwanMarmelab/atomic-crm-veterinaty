@@ -67,12 +67,8 @@ export const generateConsultations = (db: Db, size = 600): Consultation[] => {
       animal_id: animal.id,
       date: visitDate.toISOString(),
       reason: random.arrayElement(REASONS),
-      diagnosis: hasDiagnosis
-        ? random.arrayElement(DIAGNOSES)
-        : null,
-      treatment: hasTreatment
-        ? random.arrayElement(TREATMENTS)
-        : null,
+      diagnosis: hasDiagnosis ? random.arrayElement(DIAGNOSES) : null,
+      treatment: hasTreatment ? random.arrayElement(TREATMENTS) : null,
       next_appointment: nextAppointmentDate
         ? nextAppointmentDate.toISOString()
         : null,

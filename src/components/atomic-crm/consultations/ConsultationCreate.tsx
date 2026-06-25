@@ -14,8 +14,9 @@ import { FormToolbar } from "../layout/FormToolbar";
  */
 export const ConsultationCreate = () => {
   const location = useLocation();
-  const locationRecord = (location.state as { record?: Record<string, unknown> } | null)
-    ?.record;
+  const locationRecord = (
+    location.state as { record?: Record<string, unknown> } | null
+  )?.record;
   const hasPreselectedAnimal =
     locationRecord != null && "animal_id" in locationRecord;
 

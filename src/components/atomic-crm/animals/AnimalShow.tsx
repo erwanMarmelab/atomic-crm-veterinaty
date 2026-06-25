@@ -153,18 +153,21 @@ const ConsultationsListContent = ({
           {translate("crm.common.loading")}
         </span>
       )}
-      {!isPending && consultations?.map((c) => (
-        <Link
-          key={c.id}
-          to={`/consultations/${c.id}/show`}
-          className="hover:underline block"
-        >
-          <span className="font-medium">
-            {new Date(c.date).toLocaleDateString()}
-          </span>
-          <span className="text-muted-foreground ml-2 text-xs">{c.reason}</span>
-        </Link>
-      ))}
+      {!isPending &&
+        consultations?.map((c) => (
+          <Link
+            key={c.id}
+            to={`/consultations/${c.id}/show`}
+            className="hover:underline block"
+          >
+            <span className="font-medium">
+              {new Date(c.date).toLocaleDateString()}
+            </span>
+            <span className="text-muted-foreground ml-2 text-xs">
+              {c.reason}
+            </span>
+          </Link>
+        ))}
       {!isPending && (!consultations || consultations.length === 0) && (
         <span className="text-muted-foreground text-xs">
           {translate("resources.consultations.empty.title")}

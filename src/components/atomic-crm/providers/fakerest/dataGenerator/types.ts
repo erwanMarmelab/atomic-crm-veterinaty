@@ -1,4 +1,10 @@
-import type { Animal, Consultation, Contact, ContactNote, Sale } from "../../../types";
+import type {
+  Animal,
+  Consultation,
+  Contact,
+  ContactNote,
+  Sale,
+} from "../../../types";
 import type { ConfigurationContextValue } from "../../../root/ConfigurationContext";
 
 export interface Db {

@@ -49,7 +49,10 @@ const ConsultationListContent = () => {
   return (
     <div className="md:divide-y">
       {consultations.map((consultation) => (
-        <ConsultationListItem key={consultation.id} consultation={consultation} />
+        <ConsultationListItem
+          key={consultation.id}
+          consultation={consultation}
+        />
       ))}
     </div>
   );
@@ -70,7 +73,9 @@ const ConsultationListItem = ({
     >
       <div className="flex-1 min-w-0">
         <div className="font-medium">{dateLabel}</div>
-        <div className="text-sm text-muted-foreground">{consultation.reason}</div>
+        <div className="text-sm text-muted-foreground">
+          {consultation.reason}
+        </div>
       </div>
       {consultation.next_appointment && (
         <div className="text-sm text-muted-foreground ml-4">
