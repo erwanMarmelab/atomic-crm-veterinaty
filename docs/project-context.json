@@ -111,5 +111,12 @@
     "env":      { "status": "pending" },
     "deploy":   { "status": "pending" }
   },
-  "tickets": []
+  "tickets": [
+    { "ticket_id": "TASK-001", "title": "Remove unused company, deal, task and tag entities from default CRM", "status": "pending" },
+    { "ticket_id": "TASK-002", "title": "Create the Animal entity (patient) with owner relation", "status": "pending" },
+    { "ticket_id": "TASK-003", "title": "Create the Consultation entity (clinic visit) linked to an animal", "status": "pending" },
+    { "ticket_id": "TASK-004", "title": "Create the Vaccination entity with computed expiry linked to an animal", "status": "pending" },
+    { "ticket_id": "TASK-005", "title": "Build the veterinary dashboard widgets", "status": "pending" },
+    { "ticket_id": "TASK-006", "title": "Apply veterinary branding, theme and French locale", "status": "pending" }
+  ]
 }
