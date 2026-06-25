@@ -18,7 +18,6 @@ __screenshots__
 # misc
 .DS_Store
 .env.local
-.worktree-link-modules.mjs
 .env.production
 .env.development.local
 .env.test.local
