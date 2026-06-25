@@ -9,7 +9,9 @@ const adminSupabase = createClient(
 
 // Tables in FK-safe deletion order (children before parents)
 const TABLES = [
+  "consultations",
   "contact_notes",
+  "animals",
   "contacts",
   "favicons_excluded_domains",
   "configuration",
@@ -115,6 +117,33 @@ async function createNotes({
   }
 }
 
+async function createAnimal({
+  name,
+  species,
+  owner_id,
+}: {
+  name: string;
+  species: string;
+  owner_id: string | number;
+}) {
+  const { data, error } = await adminSupabase
+    .from("animals")
+    .insert({
+      name,
+      species,
+      status: "active",
+      owner_id,
+    })
+    .select("id")
+    .single();
+
+  if (error) {
+    throw new Error(`Failed to create animal: ${error.message}`);
+  }
+
+  return data;
+}
+
 async function createContact({
   first_name,
   last_name,
@@ -187,6 +216,7 @@ export const test = base.extend<{
   createUser: typeof createUser;
   createSales: typeof createSales;
   createContact: typeof createContact;
+  createAnimal: typeof createAnimal;
   createNotes: typeof createNotes;
   menu: ReturnType<typeof getMenuMethod>;
   dismissToast: (content: string) => Promise<void>;
@@ -212,6 +242,10 @@ export const test = base.extend<{
   // eslint-disable-next-line no-empty-pattern
   createContact: async ({}, cb) => {
     await cb(createContact);
+  },
+  // eslint-disable-next-line no-empty-pattern
+  createAnimal: async ({}, cb) => {
+    await cb(createAnimal);
   },
   // eslint-disable-next-line no-empty-pattern
   createNotes: async ({}, cb) => {

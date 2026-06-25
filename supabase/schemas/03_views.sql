@@ -59,6 +59,23 @@ select
 from public.animals a
 join public.contacts co on co.id = a.owner_id;
 
+create or replace view public.consultations_summary with (security_invoker = on) as
+select
+    c.id,
+    c.animal_id,
+    c.date,
+    c.reason,
+    c.diagnosis,
+    c.treatment,
+    c.next_appointment,
+    c.attachments,
+    a.name as animal_name,
+    co.first_name as owner_first_name,
+    co.last_name as owner_last_name
+from public.consultations c
+join public.animals a on a.id = c.animal_id
+join public.contacts co on co.id = a.owner_id;
+
 create or replace view public.init_state with (security_invoker = off) as
 select count(sub.id) as is_initialized
 from (

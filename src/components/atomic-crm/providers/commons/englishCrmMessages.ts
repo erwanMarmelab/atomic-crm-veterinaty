@@ -1,5 +1,33 @@
 export const englishCrmMessages = {
   resources: {
+    consultations: {
+      name: "Consultation |||| Consultations",
+      forcedCaseName: "Consultation",
+      title: "Visit on %{date}",
+      field_categories: {
+        details: "Visit details",
+        attachments: "Attachments",
+      },
+      fields: {
+        date: "Date",
+        reason: "Reason",
+        diagnosis: "Diagnosis",
+        treatment: "Treatment",
+        next_appointment: "Next appointment",
+        attachments: "Attachments",
+        animal_id: "Animal",
+      },
+      action: {
+        add: "Add consultation",
+        create: "Create consultation",
+        edit: "Edit consultation",
+        new: "New consultation",
+        show: "Show consultation",
+      },
+      empty: {
+        title: "No consultations yet",
+      },
+    },
     animals: {
       name: "Animal |||| Animals",
       forcedCaseName: "Animal",

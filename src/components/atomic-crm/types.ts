@@ -118,6 +118,23 @@ export type Animal = {
   owner_id: Identifier;
 } & Pick<RaRecord, "id">;
 
+export type Consultation = {
+  /** ISO date string for the visit date (required) */
+  date: string;
+  /** Reason for the consultation visit (required) */
+  reason: string;
+  /** Veterinary diagnosis (optional) */
+  diagnosis?: string | null;
+  /** Prescribed treatment (optional) */
+  treatment?: string | null;
+  /** ISO date string for the next appointment (optional) */
+  next_appointment?: string | null;
+  /** File references for radiographs, lab results, etc. */
+  attachments?: AttachmentNote[];
+  /** Reference to the animal patient (required) */
+  animal_id: Identifier;
+} & Pick<RaRecord, "id">;
+
 export interface LabeledValue {
   value: string;
   label: string;
