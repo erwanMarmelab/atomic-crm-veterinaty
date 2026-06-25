@@ -105,6 +105,19 @@ export interface RAFile {
 
 export type AttachmentNote = RAFile;
 
+export type AnimalStatus = "active" | "deceased" | "lost";
+
+export type Animal = {
+  name: string;
+  species: string;
+  breed?: string | null;
+  date_of_birth?: string | null;
+  weight_kg?: number | null;
+  microchip_number?: string | null;
+  status: AnimalStatus;
+  owner_id: Identifier;
+} & Pick<RaRecord, "id">;
+
 export interface LabeledValue {
   value: string;
   label: string;

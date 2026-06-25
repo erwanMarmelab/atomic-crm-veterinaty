@@ -4,11 +4,18 @@
 --
 
 -- Enable RLS on all tables
+alter table public.animals enable row level security;
 alter table public.contacts enable row level security;
 alter table public.contact_notes enable row level security;
 alter table public.sales enable row level security;
 alter table public.configuration enable row level security;
 alter table public.favicons_excluded_domains enable row level security;
+
+-- Animals
+create policy "Enable read access for authenticated users" on public.animals for select to authenticated using (true);
+create policy "Enable insert for authenticated users only" on public.animals for insert to authenticated with check (true);
+create policy "Enable update for authenticated users only" on public.animals for update to authenticated using (true) with check (true);
+create policy "Animal Delete Policy" on public.animals for delete to authenticated using (true);
 
 -- Contacts
 create policy "Enable read access for authenticated users" on public.contacts for select to authenticated using (true);

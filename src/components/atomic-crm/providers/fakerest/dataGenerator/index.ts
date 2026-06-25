@@ -1,3 +1,4 @@
+import { generateAnimals } from "./animals";
 import { generateContactNotes } from "./contactNotes";
 import { generateContacts } from "./contacts";
 import { finalize } from "./finalize";
@@ -9,6 +10,7 @@ export default (): Db => {
   db.sales = generateSales(db);
   db.contacts = generateContacts(db);
   db.contact_notes = generateContactNotes(db);
+  db.animals = generateAnimals(db);
   db.configuration = [
     {
       id: 1,
