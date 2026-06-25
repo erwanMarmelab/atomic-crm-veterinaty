@@ -2,6 +2,34 @@ import type { CrmMessages } from "./englishCrmMessages";
 
 export const frenchCrmMessages = {
   resources: {
+    consultations: {
+      name: "Consultation |||| Consultations",
+      forcedCaseName: "Consultation",
+      title: "Visite du %{date}",
+      field_categories: {
+        details: "Détails de la visite",
+        attachments: "Pièces jointes",
+      },
+      fields: {
+        date: "Date",
+        reason: "Motif",
+        diagnosis: "Diagnostic",
+        treatment: "Traitement",
+        next_appointment: "Prochain rendez-vous",
+        attachments: "Pièces jointes",
+        animal_id: "Animal",
+      },
+      action: {
+        add: "Ajouter une consultation",
+        create: "Créer une consultation",
+        edit: "Modifier la consultation",
+        new: "Nouvelle consultation",
+        show: "Afficher la consultation",
+      },
+      empty: {
+        title: "Aucune consultation pour l'instant",
+      },
+    },
     animals: {
       name: "Animal |||| Animaux",
       forcedCaseName: "Animal",

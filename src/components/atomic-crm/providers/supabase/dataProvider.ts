@@ -7,6 +7,7 @@ import {
   type ResourceCallbacks,
 } from "ra-core";
 import type {
+  Consultation,
   ContactNote,
   RAFile,
   Sale,
@@ -38,6 +39,9 @@ const getDataProviderWithCustomMethods = () => {
       if (resource === "animals") {
         return baseDataProvider.getList("animals_summary", params);
       }
+      if (resource === "consultations") {
+        return baseDataProvider.getList("consultations_summary", params);
+      }
       if (resource === "activity_log") {
         const { data, total } = await baseDataProvider.getList(
           "activity_log",
@@ -62,6 +66,9 @@ const getDataProviderWithCustomMethods = () => {
       }
       if (resource === "animals") {
         return baseDataProvider.getOne("animals_summary", params);
+      }
+      if (resource === "consultations") {
+        return baseDataProvider.getOne("consultations_summary", params);
       }
 
       return baseDataProvider.getOne(resource, params);
@@ -227,6 +234,17 @@ const lifeCycleCallbacks: ResourceCallbacks[] = [
   {
     resource: "contact_notes",
     beforeSave: async (data: ContactNote, _, __) => {
+      if (data.attachments) {
+        data.attachments = await Promise.all(
+          data.attachments.map((fi) => uploadToBucket(fi)),
+        );
+      }
+      return data;
+    },
+  },
+  {
+    resource: "consultations",
+    beforeSave: async (data: Consultation, _, __) => {
       if (data.attachments) {
         data.attachments = await Promise.all(
           data.attachments.map((fi) => uploadToBucket(fi)),

@@ -100,7 +100,46 @@ export const createDataProvider = ({
         const start = (page - 1) * perPage;
         return { data: all.slice(start, start + perPage), total: all.length };
       }
+      if (resource === "consultations") {
+        const result = await baseDataProvider.getList(resource, params);
+        return {
+          ...result,
+          data: result.data.map((consultation) => {
+            const animal = db.animals.find(
+              (a) => a.id === consultation.animal_id,
+            );
+            const owner = animal
+              ? db.contacts.find((c) => c.id === animal.owner_id)
+              : undefined;
+            return {
+              ...consultation,
+              animal_name: animal?.name,
+              owner_first_name: owner?.first_name,
+              owner_last_name: owner?.last_name,
+            };
+          }),
+        };
+      }
       return baseDataProvider.getList(resource, params);
+    },
+    async getOne(resource: string, params: any) {
+      if (resource === "consultations") {
+        const result = await baseDataProvider.getOne(resource, params);
+        const animal = db.animals.find((a) => a.id === result.data.animal_id);
+        const owner = animal
+          ? db.contacts.find((c) => c.id === animal.owner_id)
+          : undefined;
+        return {
+          ...result,
+          data: {
+            ...result.data,
+            animal_name: animal?.name,
+            owner_first_name: owner?.first_name,
+            owner_last_name: owner?.last_name,
+          },
+        };
+      }
+      return baseDataProvider.getOne(resource, params);
     },
     signUp: async ({
       email,
@@ -314,6 +353,10 @@ export const createDataProvider = ({
         resource: "contact_notes",
         beforeSave: async (params) => preserveAttachmentMimeType(params),
       } satisfies ResourceCallbacks<ContactNote>,
+      {
+        resource: "consultations",
+        beforeSave: async (params) => preserveAttachmentMimeType(params),
+      },
     ],
   ) as CrmDataProvider;
 

@@ -16,6 +16,7 @@ import { SetPasswordPage } from "@/components/supabase/set-password-page";
 import { OAuthConsentPage } from "@/components/supabase/oauth-consent-page";
 
 import animals from "../animals";
+import consultations from "../consultations";
 import contacts from "../contacts";
 import { Dashboard } from "../dashboard/Dashboard";
 import { MobileDashboard } from "../dashboard/MobileDashboard";
@@ -240,6 +241,7 @@ const DesktopAdmin = (
       </CustomRoutes>
       <Resource name="contacts" {...contacts} />
       <Resource name="animals" {...animals} />
+      <Resource name="consultations" {...consultations} />
       <Resource name="contact_notes" />
       <Resource name="sales" {...sales} />
     </Admin>
@@ -307,6 +309,7 @@ const MobileAdmin = (
           <Route path=":id/notes/:noteId" element={<NoteShowPage />} />
         </Resource>
         <Resource name="animals" {...animals} />
+        <Resource name="consultations" {...consultations} />
       </Admin>
     </PersistQueryClientProvider>
   );
