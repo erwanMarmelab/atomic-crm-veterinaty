@@ -347,6 +347,11 @@ export const englishCrmMessages = {
         empty: "No appointments scheduled this week",
         appointment_on: "Appointment on %{date}",
       },
+      upcoming_consultations: {
+        title: "Upcoming Consultations",
+        empty: "No upcoming consultations",
+        appointment_on: "On %{date}",
+      },
     },
     header: {
       import_data: "Import data",
