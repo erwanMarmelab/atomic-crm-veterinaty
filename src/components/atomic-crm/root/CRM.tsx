@@ -309,6 +309,7 @@ const MobileAdmin = (
           <Route path=":id/notes/:noteId" element={<NoteShowPage />} />
         </Resource>
         <Resource name="animals" {...animals} />
+        <Resource name="consultations" {...consultations} />
       </Admin>
     </PersistQueryClientProvider>
   );
