@@ -3,11 +3,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 import type { Contact, ContactNote } from "../types";
 import { AppointmentsThisWeekWidget } from "./AppointmentsThisWeekWidget";
-import { DashboardActivityLog } from "./DashboardActivityLog";
 import { DashboardStepper } from "./DashboardStepper";
 import { UpcomingConsultationsWidget } from "./UpcomingConsultationsWidget";
 import { VaccinationsDueWidget } from "./VaccinationsDueWidget";
-import { Welcome } from "./Welcome";
 import MobileHeader from "../layout/MobileHeader";
 import { MobileContent } from "../layout/MobileContent";
 import { useConfigurationContext } from "../root/ConfigurationContext";
@@ -85,11 +83,9 @@ export const MobileDashboard = () => {
   return (
     <Wrapper>
       <div className="flex flex-col gap-6 mt-1">
-        {import.meta.env.VITE_IS_DEMO === "true" ? <Welcome /> : null}
         <VaccinationsDueWidget />
         <AppointmentsThisWeekWidget />
         <UpcomingConsultationsWidget />
-        <DashboardActivityLog />
       </div>
     </Wrapper>
   );
