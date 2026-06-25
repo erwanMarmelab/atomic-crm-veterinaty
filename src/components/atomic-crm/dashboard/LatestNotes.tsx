@@ -2,7 +2,6 @@ import { formatDistance } from "date-fns";
 import { FileText } from "lucide-react";
 import { useGetIdentity, useGetList, useTranslate } from "ra-core";
 import { ReferenceField } from "@/components/admin/reference-field";
-import { TextField } from "@/components/admin/text-field";
 import { Card, CardContent } from "@/components/ui/card";
 
 import type { Contact, ContactNote } from "../types";
@@ -19,33 +18,15 @@ export const LatestNotes = () => {
     },
     { enabled: Number.isInteger(identity?.id) },
   );
-  const { data: dealNotesData, isPending: dealNotesLoading } = useGetList(
-    "deal_notes",
-    {
-      pagination: { page: 1, perPage: 5 },
-      sort: { field: "date", order: "DESC" },
-      filter: { sales_id: identity?.id },
-    },
-    { enabled: Number.isInteger(identity?.id) },
-  );
-  if (contactNotesLoading || dealNotesLoading) {
+
+  if (contactNotesLoading) {
     return null;
   }
-  // TypeScript guards
-  if (!contactNotesData || !dealNotesData) {
+  if (!contactNotesData) {
     return null;
   }
 
-  const allNotes = ([] as any[])
-    .concat(
-      contactNotesData.map((note) => ({
-        ...note,
-        type: "contactNote",
-      })),
-      dealNotesData.map((note) => ({ ...note, type: "dealNote" })),
-    )
-    .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
-    .slice(0, 5);
+  const notes = contactNotesData.slice(0, 5);
 
   return (
     <div>
@@ -59,18 +40,14 @@ export const LatestNotes = () => {
       </div>
       <Card>
         <CardContent>
-          {allNotes.map((note) => (
+          {notes.map((note) => (
             <div
-              id={`${note.type}_${note.id}`}
-              key={`${note.type}_${note.id}`}
+              id={`contactNote_${note.id}`}
+              key={`contactNote_${note.id}`}
               className="mb-8"
             >
               <div className="text-sm text-muted-foreground">
-                {note.type === "dealNote" ? (
-                  <Deal note={note} />
-                ) : (
-                  <Contact note={note} />
-                )}
+                <ContactRef note={note} />
                 {", "}
                 {translate("crm.dashboard.latest_notes_added_ago", {
                   timeAgo: formatDistance(note.date, new Date(), {
@@ -91,24 +68,7 @@ export const LatestNotes = () => {
   );
 };
 
-const Deal = ({ note }: any) => {
-  const translate = useTranslate();
-  return (
-    <>
-      {translate("resources.deals.forcedCaseName")}{" "}
-      <ReferenceField
-        record={note}
-        source="deal_id"
-        reference="deals"
-        link="show"
-      >
-        <TextField source="name" />
-      </ReferenceField>
-    </>
-  );
-};
-
-const Contact = ({ note }: any) => {
+const ContactRef = ({ note }: { note: ContactNote }) => {
   const translate = useTranslate();
   return (
     <>
