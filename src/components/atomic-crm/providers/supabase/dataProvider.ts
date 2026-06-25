@@ -7,6 +7,7 @@ import {
   type ResourceCallbacks,
 } from "ra-core";
 import type {
+  Consultation,
   ContactNote,
   RAFile,
   Sale,
@@ -227,6 +228,17 @@ const lifeCycleCallbacks: ResourceCallbacks[] = [
   {
     resource: "contact_notes",
     beforeSave: async (data: ContactNote, _, __) => {
+      if (data.attachments) {
+        data.attachments = await Promise.all(
+          data.attachments.map((fi) => uploadToBucket(fi)),
+        );
+      }
+      return data;
+    },
+  },
+  {
+    resource: "consultations",
+    beforeSave: async (data: Consultation, _, __) => {
       if (data.attachments) {
         data.attachments = await Promise.all(
           data.attachments.map((fi) => uploadToBucket(fi)),

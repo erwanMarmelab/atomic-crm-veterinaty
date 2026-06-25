@@ -314,6 +314,10 @@ export const createDataProvider = ({
         resource: "contact_notes",
         beforeSave: async (params) => preserveAttachmentMimeType(params),
       } satisfies ResourceCallbacks<ContactNote>,
+      {
+        resource: "consultations",
+        beforeSave: async (params) => preserveAttachmentMimeType(params),
+      },
     ],
   ) as CrmDataProvider;
 
