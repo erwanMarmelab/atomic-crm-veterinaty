@@ -39,42 +39,84 @@ async function signInAndReachDashboard(
   await page.waitForLoadState("networkidle");
 }
 
+/**
+ * Seeds dr.smith with a future consultation for Whiskers and returns
+ * the fixtures so tests can reuse the data.
+ */
+async function seedSmithFutureConsultation({
+  createSales,
+  createContact,
+  createAnimal,
+  createConsultation,
+}: {
+  createSales: (args: {
+    first_name: string;
+    last_name: string;
+    email: string;
+    password: string;
+  }) => Promise<{ id: string | number }>;
+  createContact: (args: {
+    first_name: string;
+    last_name: string;
+    title: string;
+    sales_id: string | number;
+  }) => Promise<{ id: string | number }>;
+  createAnimal: (args: {
+    name: string;
+    species: string;
+    owner_id: string | number;
+  }) => Promise<{ id: string | number }>;
+  createConsultation: (args: {
+    animal_id: string | number;
+    date: string;
+    reason: string;
+    next_appointment: string;
+  }) => Promise<unknown>;
+}) {
+  const sales = await createSales({
+    first_name: "Dr",
+    last_name: "Smith",
+    email: "dr.smith@vetclinic.com",
+    password: "password",
+  });
+
+  const contact = await createContact({
+    first_name: "Bob",
+    last_name: "Petowner",
+    title: "Pet owner",
+    sales_id: sales.id,
+  });
+
+  const animal = await createAnimal({
+    name: "Whiskers",
+    species: "Cat",
+    owner_id: contact.id,
+  });
+
+  // Consultation with next_appointment 5 days in the future
+  await createConsultation({
+    animal_id: animal.id,
+    date: isoDateOffset(-3),
+    reason: "Routine check",
+    next_appointment: isoDateOffset(5),
+  });
+}
+
 test.describe("Upcoming Consultations dashboard widget", () => {
-  test.beforeEach(
-    async ({ createSales, createContact, createAnimal, createConsultation }) => {
-      const sales = await createSales({
-        first_name: "Dr",
-        last_name: "Smith",
-        email: "dr.smith@vetclinic.com",
-        password: "password",
-      });
-
-      const contact = await createContact({
-        first_name: "Bob",
-        last_name: "Petowner",
-        title: "Pet owner",
-        sales_id: sales.id,
-      });
-
-      const animal = await createAnimal({
-        name: "Whiskers",
-        species: "Cat",
-        owner_id: contact.id,
-      });
-
-      // Consultation with next_appointment 5 days in the future
-      await createConsultation({
-        animal_id: animal.id,
-        date: isoDateOffset(-3),
-        reason: "Routine check",
-        next_appointment: isoDateOffset(5),
-      });
-    },
-  );
-
   test("upcoming consultations widget appears with one future appointment row", async ({
     page,
+    createSales,
+    createContact,
+    createAnimal,
+    createConsultation,
   }) => {
+    await seedSmithFutureConsultation({
+      createSales,
+      createContact,
+      createAnimal,
+      createConsultation,
+    });
+
     await signInAndReachDashboard(
       page,
       "dr.smith@vetclinic.com",
@@ -143,7 +185,18 @@ test.describe("Upcoming Consultations dashboard widget", () => {
 
   test("upcoming consultation row links to the consultation show page", async ({
     page,
+    createSales,
+    createContact,
+    createAnimal,
+    createConsultation,
   }) => {
+    await seedSmithFutureConsultation({
+      createSales,
+      createContact,
+      createAnimal,
+      createConsultation,
+    });
+
     await signInAndReachDashboard(
       page,
       "dr.smith@vetclinic.com",
