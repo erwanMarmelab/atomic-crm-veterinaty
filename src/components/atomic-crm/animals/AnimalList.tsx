@@ -8,7 +8,7 @@ import { Link } from "react-router";
 import { TopToolbar } from "../layout/TopToolbar";
 import type { Animal } from "../types";
 
-const animalFilters = [<SearchInput source="name@ilike" alwaysOn />];
+const animalFilters = [<SearchInput source="q" alwaysOn />];
 
 /**
  * List page for animals. Shows all animal patients.

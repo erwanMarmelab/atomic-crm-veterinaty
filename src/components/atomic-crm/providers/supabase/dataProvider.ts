@@ -287,6 +287,12 @@ const lifeCycleCallbacks: ResourceCallbacks[] = [
       return applyFullTextSearch(["first_name", "last_name"])(params);
     },
   },
+  {
+    resource: "animals",
+    beforeGetList: async (params) => {
+      return applyFullTextSearch(["name"])(params);
+    },
+  },
 ];
 
 export const getDataProvider = () => {
