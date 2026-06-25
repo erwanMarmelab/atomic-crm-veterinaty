@@ -4,6 +4,7 @@ import type {
   Contact,
   ContactNote,
   Sale,
+  Vaccination,
 } from "../../../types";
 import type { ConfigurationContextValue } from "../../../root/ConfigurationContext";
 
@@ -13,5 +14,6 @@ export interface Db {
   contacts: Contact[];
   contact_notes: ContactNote[];
   sales: Sale[];
+  vaccinations: Vaccination[];
   configuration: Array<{ id: number; config: ConfigurationContextValue }>;
 }

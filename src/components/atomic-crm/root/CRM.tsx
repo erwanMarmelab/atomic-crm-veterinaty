@@ -17,6 +17,7 @@ import { OAuthConsentPage } from "@/components/supabase/oauth-consent-page";
 
 import animals from "../animals";
 import consultations from "../consultations";
+import vaccinations from "../vaccinations";
 import contacts from "../contacts";
 import { Dashboard } from "../dashboard/Dashboard";
 import { MobileDashboard } from "../dashboard/MobileDashboard";
@@ -242,6 +243,7 @@ const DesktopAdmin = (
       <Resource name="contacts" {...contacts} />
       <Resource name="animals" {...animals} />
       <Resource name="consultations" {...consultations} />
+      <Resource name="vaccinations" {...vaccinations} />
       <Resource name="contact_notes" />
       <Resource name="sales" {...sales} />
     </Admin>
@@ -310,6 +312,7 @@ const MobileAdmin = (
         </Resource>
         <Resource name="animals" {...animals} />
         <Resource name="consultations" {...consultations} />
+        <Resource name="vaccinations" {...vaccinations} />
       </Admin>
     </PersistQueryClientProvider>
   );

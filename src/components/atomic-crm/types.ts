@@ -141,6 +141,21 @@ export type Consultation = {
   owner_last_name?: string;
 } & Pick<RaRecord, "id">;
 
+export type Vaccination = {
+  /** Vaccine product name (required) */
+  vaccine_name: string;
+  /** ISO date string when the vaccine was administered (required) */
+  administered_on: string;
+  /** Number of months for which the vaccine provides protection (required) */
+  validity_months: number;
+  /** ISO date string computed by the DB view: administered_on + validity_months */
+  expires_on: string;
+  /** Reference to the vaccinated animal (required) */
+  animal_id: Identifier;
+  /** Animal name joined from vaccinations_summary view */
+  animal_name?: string;
+} & Pick<RaRecord, "id">;
+
 export interface LabeledValue {
   value: string;
   label: string;

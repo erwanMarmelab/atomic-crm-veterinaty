@@ -5,6 +5,7 @@ import {
   type ResourceCallbacks,
   type UpdateParams,
 } from "ra-core";
+import { computeExpiresOn } from "./dataGenerator/vaccinations";
 import fakeRestDataProvider from "ra-data-fakerest";
 
 import type {
@@ -120,6 +121,21 @@ export const createDataProvider = ({
           }),
         };
       }
+      if (resource === "vaccinations") {
+        const result = await baseDataProvider.getList(resource, params);
+        return {
+          ...result,
+          data: result.data.map((vaccination) => {
+            const animal = db.animals.find(
+              (a) => a.id === vaccination.animal_id,
+            );
+            return {
+              ...vaccination,
+              animal_name: animal?.name,
+            };
+          }),
+        };
+      }
       return baseDataProvider.getList(resource, params);
     },
     async getOne(resource: string, params: any) {
@@ -136,6 +152,17 @@ export const createDataProvider = ({
             animal_name: animal?.name,
             owner_first_name: owner?.first_name,
             owner_last_name: owner?.last_name,
+          },
+        };
+      }
+      if (resource === "vaccinations") {
+        const result = await baseDataProvider.getOne(resource, params);
+        const animal = db.animals.find((a) => a.id === result.data.animal_id);
+        return {
+          ...result,
+          data: {
+            ...result.data,
+            animal_name: animal?.name,
           },
         };
       }
@@ -356,6 +383,25 @@ export const createDataProvider = ({
       {
         resource: "consultations",
         beforeSave: async (params) => preserveAttachmentMimeType(params),
+      },
+      {
+        resource: "vaccinations",
+        beforeSave: async (params) => {
+          const { administered_on, validity_months } = params as {
+            administered_on?: string;
+            validity_months?: number;
+          };
+          if (administered_on && validity_months != null) {
+            return {
+              ...params,
+              expires_on: computeExpiresOn(
+                new Date(administered_on),
+                validity_months,
+              ),
+            };
+          }
+          return params;
+        },
       },
     ],
   ) as CrmDataProvider;

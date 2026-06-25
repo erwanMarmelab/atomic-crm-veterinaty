@@ -1,5 +1,35 @@
 export const englishCrmMessages = {
   resources: {
+    vaccinations: {
+      name: "Vaccination |||| Vaccinations",
+      forcedCaseName: "Vaccination",
+      months: "months",
+      field_categories: {
+        details: "Vaccination details",
+      },
+      fields: {
+        vaccine_name: "Vaccine name",
+        administered_on: "Administered on",
+        validity_months: "Validity (months)",
+        expires_on: "Expires on",
+        animal_id: "Animal",
+      },
+      expiry_status: {
+        valid: "Valid",
+        expiring_soon: "Expiring soon",
+        expired: "Expired",
+      },
+      action: {
+        add: "Add vaccination",
+        create: "Create vaccination",
+        edit: "Edit vaccination",
+        new: "New vaccination",
+        show: "Show vaccination",
+      },
+      empty: {
+        title: "No vaccinations yet",
+      },
+    },
     consultations: {
       name: "Consultation |||| Consultations",
       forcedCaseName: "Consultation",
