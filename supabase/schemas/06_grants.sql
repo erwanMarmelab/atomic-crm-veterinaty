@@ -62,6 +62,10 @@ grant all on function public.set_sales_id_default() to authenticated;
 grant all on function public.set_sales_id_default() to service_role;
 
 -- Table grants
+grant all on table public.animals to anon;
+grant all on table public.animals to authenticated;
+grant all on table public.animals to service_role;
+
 grant all on table public.contacts to anon;
 grant all on table public.contacts to authenticated;
 grant all on table public.contacts to service_role;
@@ -87,6 +91,10 @@ grant all on table public.activity_log to anon;
 grant all on table public.activity_log to authenticated;
 grant all on table public.activity_log to service_role;
 
+grant all on table public.animals_summary to anon;
+grant all on table public.animals_summary to authenticated;
+grant all on table public.animals_summary to service_role;
+
 grant all on table public.contacts_summary to anon;
 grant all on table public.contacts_summary to authenticated;
 grant all on table public.contacts_summary to service_role;
@@ -96,6 +104,10 @@ grant all on table public.init_state to authenticated;
 grant all on table public.init_state to service_role;
 
 -- Sequence grants
+grant all on sequence public.animals_id_seq to anon;
+grant all on sequence public.animals_id_seq to authenticated;
+grant all on sequence public.animals_id_seq to service_role;
+
 grant all on sequence public."contactNotes_id_seq" to anon;
 grant all on sequence public."contactNotes_id_seq" to authenticated;
 grant all on sequence public."contactNotes_id_seq" to service_role;

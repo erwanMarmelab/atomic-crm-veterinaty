@@ -43,6 +43,22 @@ select
     (jsonb_path_query_array(co.phone_jsonb, '$[*]."number"'))::text as phone_fts
 from public.contacts co;
 
+create or replace view public.animals_summary with (security_invoker = on) as
+select
+    a.id,
+    a.name,
+    a.species,
+    a.breed,
+    a.date_of_birth,
+    a.weight_kg,
+    a.microchip_number,
+    a.status,
+    a.owner_id,
+    co.first_name as owner_first_name,
+    co.last_name as owner_last_name
+from public.animals a
+join public.contacts co on co.id = a.owner_id;
+
 create or replace view public.init_state with (security_invoker = off) as
 select count(sub.id) as is_initialized
 from (

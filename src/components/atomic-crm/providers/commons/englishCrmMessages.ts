@@ -1,5 +1,39 @@
 export const englishCrmMessages = {
   resources: {
+    animals: {
+      name: "Animal |||| Animals",
+      forcedCaseName: "Animal",
+      field_categories: {
+        identity: "Identity",
+        medical: "Medical info",
+        owner: "Owner",
+      },
+      fields: {
+        name: "Name",
+        species: "Species",
+        breed: "Breed",
+        date_of_birth: "Date of birth",
+        weight_kg: "Weight (kg)",
+        microchip_number: "Microchip number",
+        status: "Status",
+        owner_id: "Owner",
+      },
+      status: {
+        active: "Active",
+        deceased: "Deceased",
+        lost: "Lost",
+      },
+      action: {
+        add: "Add animal",
+        create: "Create animal",
+        edit: "Edit animal",
+        new: "New animal",
+        show: "Show animal",
+      },
+      empty: {
+        title: "No animals found",
+      },
+    },
     contacts: {
       name: "Contact |||| Contacts",
       forcedCaseName: "Contact",

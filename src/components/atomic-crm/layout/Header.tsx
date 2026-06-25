@@ -20,6 +20,8 @@ const Header = () => {
     currentPath = "/";
   } else if (matchPath("/contacts/*", location.pathname)) {
     currentPath = "/contacts";
+  } else if (matchPath("/animals/*", location.pathname)) {
+    currentPath = "/animals";
   } else {
     currentPath = false;
   }
@@ -59,6 +61,13 @@ const Header = () => {
                     })}
                     to="/contacts"
                     isActive={currentPath === "/contacts"}
+                  />
+                  <NavigationTab
+                    label={translate("resources.animals.name", {
+                      smart_count: 2,
+                    })}
+                    to="/animals"
+                    isActive={currentPath === "/animals"}
                   />
                 </nav>
               </div>

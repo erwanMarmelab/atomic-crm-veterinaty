@@ -2,6 +2,40 @@ import type { CrmMessages } from "./englishCrmMessages";
 
 export const frenchCrmMessages = {
   resources: {
+    animals: {
+      name: "Animal |||| Animaux",
+      forcedCaseName: "Animal",
+      field_categories: {
+        identity: "Identité",
+        medical: "Informations médicales",
+        owner: "Propriétaire",
+      },
+      fields: {
+        name: "Nom",
+        species: "Espèce",
+        breed: "Race",
+        date_of_birth: "Date de naissance",
+        weight_kg: "Poids (kg)",
+        microchip_number: "Numéro de puce",
+        status: "Statut",
+        owner_id: "Propriétaire",
+      },
+      status: {
+        active: "Actif",
+        deceased: "Décédé",
+        lost: "Perdu",
+      },
+      action: {
+        add: "Ajouter un animal",
+        create: "Créer un animal",
+        edit: "Modifier l'animal",
+        new: "Nouvel animal",
+        show: "Afficher l'animal",
+      },
+      empty: {
+        title: "Aucun animal trouvé",
+      },
+    },
     contacts: {
       name: "Contact |||| Contacts",
       forcedCaseName: "Contact",

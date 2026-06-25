@@ -27,6 +27,7 @@ import type { Contact } from "../types";
 import { Avatar } from "./Avatar";
 import { ContactAside } from "./ContactAside";
 import { MobileBackButton } from "../misc/MobileBackButton";
+import { ContactAnimalsList } from "./ContactAnimalsList";
 
 export const ContactShow = (props: ShowBaseProps = {}) => {
   const isMobile = useIsMobile();
@@ -228,6 +229,7 @@ const ContactShowContent = () => {
         </Card>
       </div>
       <ContactAside />
+      <ContactAnimalsList />
     </div>
   );
 };
