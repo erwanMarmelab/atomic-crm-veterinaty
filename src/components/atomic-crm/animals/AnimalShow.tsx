@@ -96,11 +96,7 @@ const AnimalShowContent = () => {
 
       <div className="hidden sm:block w-72 min-w-72 text-sm">
         <AsideSection title={translate("resources.animals.fields.owner_id")}>
-          <ReferenceField
-            reference="contacts"
-            source="owner_id"
-            link="show"
-          >
+          <ReferenceField reference="contacts" source="owner_id" link="show">
             <RecordRepresentation />
           </ReferenceField>
         </AsideSection>

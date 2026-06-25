@@ -7,7 +7,6 @@ import { Link } from "react-router";
 import { TopToolbar } from "../layout/TopToolbar";
 import type { Animal } from "../types";
 
-
 /**
  * List page for animals. Shows all animal patients.
  */

@@ -76,7 +76,14 @@ const ANIMAL_NAMES = [
   "Rex",
 ];
 
-const ANIMAL_STATUSES: AnimalStatus[] = ["active", "active", "active", "active", "deceased", "lost"];
+const ANIMAL_STATUSES: AnimalStatus[] = [
+  "active",
+  "active",
+  "active",
+  "active",
+  "deceased",
+  "lost",
+];
 
 /**
  * Generates demo animal records linked to existing contacts.
@@ -95,7 +102,9 @@ export const generateAnimals = (db: Db, size = 300): Animal[] => {
     );
     const hasMicrochip = datatype.boolean();
     const microchip_number = hasMicrochip
-      ? datatype.number({ min: 100000000000000, max: 999999999999999 }).toString()
+      ? datatype
+          .number({ min: 100000000000000, max: 999999999999999 })
+          .toString()
       : null;
 
     const owner = random.arrayElement(db.contacts);

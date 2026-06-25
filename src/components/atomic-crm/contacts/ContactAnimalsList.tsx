@@ -1,4 +1,9 @@
-import { ListBase, useListContext, useShowContext, useTranslate } from "ra-core";
+import {
+  ListBase,
+  useListContext,
+  useShowContext,
+  useTranslate,
+} from "ra-core";
 import { buttonVariants } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { Link } from "react-router";
@@ -36,11 +41,7 @@ export const ContactAnimalsList = () => {
   );
 };
 
-const AnimalsListContent = ({
-  contactId,
-}: {
-  contactId: number | string;
-}) => {
+const AnimalsListContent = ({ contactId }: { contactId: number | string }) => {
   const { data: animals, isPending } = useListContext<Animal>();
   const translate = useTranslate();
 

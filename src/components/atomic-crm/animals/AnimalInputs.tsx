@@ -32,16 +32,8 @@ const AnimalIdentityInputs = () => {
       <h6 className="text-lg font-semibold">
         {translate("resources.animals.field_categories.identity")}
       </h6>
-      <TextInput
-        source="name"
-        validate={required()}
-        helperText={false}
-      />
-      <TextInput
-        source="species"
-        validate={required()}
-        helperText={false}
-      />
+      <TextInput source="name" validate={required()} helperText={false} />
+      <TextInput source="species" validate={required()} helperText={false} />
       <TextInput source="breed" helperText={false} />
     </div>
   );
