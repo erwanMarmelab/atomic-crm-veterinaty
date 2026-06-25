@@ -23,6 +23,10 @@ const Header = () => {
     currentPath = "/contacts";
   } else if (matchPath("/animals/*", location.pathname)) {
     currentPath = "/animals";
+  } else if (matchPath("/consultations/*", location.pathname)) {
+    currentPath = "/consultations";
+  } else if (matchPath("/vaccinations/*", location.pathname)) {
+    currentPath = "/vaccinations";
   } else {
     currentPath = false;
   }
@@ -69,6 +73,20 @@ const Header = () => {
                     })}
                     to="/animals"
                     isActive={currentPath === "/animals"}
+                  />
+                  <NavigationTab
+                    label={translate("resources.consultations.name", {
+                      smart_count: 2,
+                    })}
+                    to="/consultations"
+                    isActive={currentPath === "/consultations"}
+                  />
+                  <NavigationTab
+                    label={translate("resources.vaccinations.name", {
+                      smart_count: 2,
+                    })}
+                    to="/vaccinations"
+                    isActive={currentPath === "/vaccinations"}
                   />
                 </nav>
               </div>

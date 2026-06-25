@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Home, Plus, Settings, Users } from "lucide-react";
+import { Home, PawPrint, Plus, Settings, Stethoscope, Syringe, Users } from "lucide-react";
 import { useTranslate } from "ra-core";
 import { Link, matchPath, useLocation, useMatch } from "react-router";
 import { ContactCreateSheet } from "../contacts/ContactCreateSheet";
@@ -22,6 +22,12 @@ export const MobileNavigation = () => {
     currentPath = "/";
   } else if (matchPath("/contacts/*", location.pathname)) {
     currentPath = "/contacts";
+  } else if (matchPath("/animals/*", location.pathname)) {
+    currentPath = "/animals";
+  } else if (matchPath("/consultations/*", location.pathname)) {
+    currentPath = "/consultations";
+  } else if (matchPath("/vaccinations/*", location.pathname)) {
+    currentPath = "/vaccinations";
   } else {
     currentPath = false;
   }
@@ -60,6 +66,30 @@ export const MobileNavigation = () => {
               smart_count: 2,
             })}
             isActive={currentPath === "/contacts"}
+          />
+          <NavigationButton
+            href="/animals"
+            Icon={PawPrint}
+            label={translate("resources.animals.name", {
+              smart_count: 2,
+            })}
+            isActive={currentPath === "/animals"}
+          />
+          <NavigationButton
+            href="/consultations"
+            Icon={Stethoscope}
+            label={translate("resources.consultations.name", {
+              smart_count: 2,
+            })}
+            isActive={currentPath === "/consultations"}
+          />
+          <NavigationButton
+            href="/vaccinations"
+            Icon={Syringe}
+            label={translate("resources.vaccinations.name", {
+              smart_count: 2,
+            })}
+            isActive={currentPath === "/vaccinations"}
           />
           <CreateButton />
           <SettingsButton />
