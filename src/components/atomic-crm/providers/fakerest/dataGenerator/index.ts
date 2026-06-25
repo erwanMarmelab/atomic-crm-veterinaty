@@ -4,6 +4,7 @@ import { generateContactNotes } from "./contactNotes";
 import { generateContacts } from "./contacts";
 import { finalize } from "./finalize";
 import { generateSales } from "./sales";
+import { generateVaccinations } from "./vaccinations";
 import type { Db } from "./types";
 
 export default (): Db => {
@@ -13,6 +14,7 @@ export default (): Db => {
   db.contact_notes = generateContactNotes(db);
   db.animals = generateAnimals(db);
   db.consultations = generateConsultations(db);
+  db.vaccinations = generateVaccinations(db);
   db.configuration = [
     {
       id: 1,

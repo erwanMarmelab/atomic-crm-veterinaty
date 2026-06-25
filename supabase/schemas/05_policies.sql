@@ -11,6 +11,13 @@ alter table public.sales enable row level security;
 alter table public.configuration enable row level security;
 alter table public.favicons_excluded_domains enable row level security;
 
+-- Vaccinations
+alter table public.vaccinations enable row level security;
+create policy "Enable read access for authenticated users" on public.vaccinations for select to authenticated using (true);
+create policy "Enable insert for authenticated users only" on public.vaccinations for insert to authenticated with check (true);
+create policy "Enable update for authenticated users only" on public.vaccinations for update to authenticated using (true) with check (true);
+create policy "Vaccination Delete Policy" on public.vaccinations for delete to authenticated using (true);
+
 -- Consultations
 alter table public.consultations enable row level security;
 create policy "Enable read access for authenticated users" on public.consultations for select to authenticated using (true);

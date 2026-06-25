@@ -9,6 +9,7 @@ const adminSupabase = createClient(
 
 // Tables in FK-safe deletion order (children before parents)
 const TABLES = [
+  "vaccinations",
   "consultations",
   "contact_notes",
   "animals",
@@ -193,6 +194,35 @@ async function createContact({
   return data;
 }
 
+async function createVaccination({
+  animal_id,
+  vaccine_name,
+  administered_on,
+  validity_months,
+}: {
+  animal_id: string | number;
+  vaccine_name: string;
+  administered_on: string;
+  validity_months: number;
+}) {
+  const { data, error } = await adminSupabase
+    .from("vaccinations")
+    .insert({
+      animal_id,
+      vaccine_name,
+      administered_on,
+      validity_months,
+    })
+    .select("id")
+    .single();
+
+  if (error) {
+    throw new Error(`Failed to create vaccination: ${error.message}`);
+  }
+
+  return data;
+}
+
 const getMenuMethod = ({ page }: { page: Page; isMobile: boolean }) => ({
   goToDashboard: async () => {
     await page.getByRole("link", { name: "Dashboard" }).click();
@@ -217,6 +247,7 @@ export const test = base.extend<{
   createSales: typeof createSales;
   createContact: typeof createContact;
   createAnimal: typeof createAnimal;
+  createVaccination: typeof createVaccination;
   createNotes: typeof createNotes;
   menu: ReturnType<typeof getMenuMethod>;
   dismissToast: (content: string) => Promise<void>;
@@ -246,6 +277,10 @@ export const test = base.extend<{
   // eslint-disable-next-line no-empty-pattern
   createAnimal: async ({}, cb) => {
     await cb(createAnimal);
+  },
+  // eslint-disable-next-line no-empty-pattern
+  createVaccination: async ({}, cb) => {
+    await cb(createVaccination);
   },
   // eslint-disable-next-line no-empty-pattern
   createNotes: async ({}, cb) => {

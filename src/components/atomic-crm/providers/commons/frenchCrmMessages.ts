@@ -2,6 +2,36 @@ import type { CrmMessages } from "./englishCrmMessages";
 
 export const frenchCrmMessages = {
   resources: {
+    vaccinations: {
+      name: "Vaccination |||| Vaccinations",
+      forcedCaseName: "Vaccination",
+      months: "mois",
+      field_categories: {
+        details: "Détails de la vaccination",
+      },
+      fields: {
+        vaccine_name: "Nom du vaccin",
+        administered_on: "Administré le",
+        validity_months: "Validité (mois)",
+        expires_on: "Expire le",
+        animal_id: "Animal",
+      },
+      expiry_status: {
+        valid: "Valide",
+        expiring_soon: "Expire bientôt",
+        expired: "Expiré",
+      },
+      action: {
+        add: "Ajouter une vaccination",
+        create: "Créer une vaccination",
+        edit: "Modifier la vaccination",
+        new: "Nouvelle vaccination",
+        show: "Afficher la vaccination",
+      },
+      empty: {
+        title: "Aucune vaccination pour l'instant",
+      },
+    },
     consultations: {
       name: "Consultation |||| Consultations",
       forcedCaseName: "Consultation",

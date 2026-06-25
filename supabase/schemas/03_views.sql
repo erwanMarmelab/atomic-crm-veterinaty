@@ -76,6 +76,18 @@ from public.consultations c
 join public.animals a on a.id = c.animal_id
 join public.contacts co on co.id = a.owner_id;
 
+create or replace view public.vaccinations_summary with (security_invoker = on) as
+select
+    v.id,
+    v.animal_id,
+    v.vaccine_name,
+    v.administered_on,
+    v.validity_months,
+    (v.administered_on + (v.validity_months * interval '1 month'))::date as expires_on,
+    a.name as animal_name
+from public.vaccinations v
+join public.animals a on a.id = v.animal_id;
+
 create or replace view public.init_state with (security_invoker = off) as
 select count(sub.id) as is_initialized
 from (
