@@ -223,6 +223,35 @@ async function createVaccination({
   return data;
 }
 
+async function createConsultation({
+  animal_id,
+  date,
+  reason,
+  next_appointment,
+}: {
+  animal_id: string | number;
+  date: string;
+  reason: string;
+  next_appointment?: string | null;
+}) {
+  const { data, error } = await adminSupabase
+    .from("consultations")
+    .insert({
+      animal_id,
+      date,
+      reason,
+      next_appointment: next_appointment ?? null,
+    })
+    .select("id")
+    .single();
+
+  if (error) {
+    throw new Error(`Failed to create consultation: ${error.message}`);
+  }
+
+  return data;
+}
+
 const getMenuMethod = ({ page }: { page: Page; isMobile: boolean }) => ({
   goToDashboard: async () => {
     await page.getByRole("link", { name: "Dashboard" }).click();
@@ -248,6 +277,7 @@ export const test = base.extend<{
   createContact: typeof createContact;
   createAnimal: typeof createAnimal;
   createVaccination: typeof createVaccination;
+  createConsultation: typeof createConsultation;
   createNotes: typeof createNotes;
   menu: ReturnType<typeof getMenuMethod>;
   dismissToast: (content: string) => Promise<void>;
@@ -281,6 +311,10 @@ export const test = base.extend<{
   // eslint-disable-next-line no-empty-pattern
   createVaccination: async ({}, cb) => {
     await cb(createVaccination);
+  },
+  // eslint-disable-next-line no-empty-pattern
+  createConsultation: async ({}, cb) => {
+    await cb(createConsultation);
   },
   // eslint-disable-next-line no-empty-pattern
   createNotes: async ({}, cb) => {

@@ -342,6 +342,16 @@ export const frenchCrmMessages = {
         progress: "%{step}/2 terminé",
         whats_next: "Et ensuite ?",
       },
+      vaccinations_due: {
+        title: "Vaccinations à venir (30 prochains jours)",
+        empty: "Aucune vaccination due dans les 30 prochains jours",
+        expires_on: "Expire le %{date}",
+      },
+      appointments_this_week: {
+        title: "Rendez-vous cette semaine",
+        empty: "Aucun rendez-vous prévu cette semaine",
+        appointment_on: "Rendez-vous le %{date}",
+      },
     },
     header: {
       import_data: "Importer des données",
