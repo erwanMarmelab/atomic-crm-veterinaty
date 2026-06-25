@@ -337,6 +337,16 @@ export const englishCrmMessages = {
         progress: "%{step}/2 done",
         whats_next: "What's next?",
       },
+      vaccinations_due: {
+        title: "Vaccinations Due (next 30 days)",
+        empty: "No vaccinations due in the next 30 days",
+        expires_on: "Expires %{date}",
+      },
+      appointments_this_week: {
+        title: "Appointments This Week",
+        empty: "No appointments scheduled this week",
+        appointment_on: "Appointment on %{date}",
+      },
     },
     header: {
       import_data: "Import data",

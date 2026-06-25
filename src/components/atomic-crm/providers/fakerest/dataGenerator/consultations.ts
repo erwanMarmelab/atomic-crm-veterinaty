@@ -48,19 +48,49 @@ const TREATMENTS = [
 ];
 
 /**
+ * Returns a random date within the current ISO week (Mon 00:00 – Sun 23:59).
+ */
+function randomDateThisWeek(): Date {
+  const now = new Date();
+  const dayOfWeek = now.getDay(); // 0 = Sunday
+  const diffToMonday = (dayOfWeek === 0 ? -6 : 1) - dayOfWeek;
+
+  const weekStart = new Date(now);
+  weekStart.setDate(now.getDate() + diffToMonday);
+  weekStart.setHours(0, 0, 0, 0);
+
+  const weekEnd = new Date(weekStart);
+  weekEnd.setDate(weekStart.getDate() + 6);
+  weekEnd.setHours(23, 59, 59, 999);
+
+  const randomMs =
+    weekStart.getTime() +
+    Math.random() * (weekEnd.getTime() - weekStart.getTime());
+  return new Date(randomMs);
+}
+
+/**
  * Generates demo consultation records linked to existing animals.
+ * Every 20th record receives a next_appointment within the current week so that
+ * the "Appointments This Week" dashboard widget always has data in the demo.
  */
 export const generateConsultations = (db: Db, size = 600): Consultation[] => {
   return Array.from(Array(size).keys()).map((id) => {
     const animal = random.arrayElement(db.animals);
     const visitDate = date.past(3);
-    const hasNextAppointment = datatype.boolean();
     const hasDiagnosis = datatype.boolean();
     const hasTreatment = hasDiagnosis && datatype.boolean();
 
-    const nextAppointmentDate = hasNextAppointment
-      ? date.future(1, visitDate)
-      : null;
+    // Every 20th record has a next_appointment this week for demo widget visibility
+    let nextAppointmentDate: Date | null;
+    if (id % 20 === 0) {
+      nextAppointmentDate = randomDateThisWeek();
+    } else {
+      const hasNextAppointment = datatype.boolean();
+      nextAppointmentDate = hasNextAppointment
+        ? date.future(1, visitDate)
+        : null;
+    }
 
     return {
       id,
