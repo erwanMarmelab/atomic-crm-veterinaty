@@ -1,7 +1,6 @@
 import {
   withLifecycleCallbacks,
   type CreateParams,
-  type DataProvider,
   type Identifier,
   type ResourceCallbacks,
   type UpdateParams,
@@ -294,7 +293,7 @@ export const createDataProvider = ({
       } satisfies ResourceCallbacks<Sale>,
       {
         resource: "contacts",
-        beforeCreate: async (createParams, dataProvider) => {
+        beforeCreate: async (createParams) => {
           const params = {
             ...createParams,
             data: {

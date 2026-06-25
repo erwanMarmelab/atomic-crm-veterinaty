@@ -223,7 +223,6 @@ export const ContactListContentMobile = () => {
 };
 
 const ContactItemContentMobile = ({ contact }: { contact: Contact }) => {
-  const translate = useTranslate();
   return (
     <Link
       to={`/contacts/${contact.id}/show`}
