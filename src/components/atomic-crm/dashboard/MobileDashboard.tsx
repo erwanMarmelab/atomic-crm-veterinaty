@@ -5,6 +5,7 @@ import type { Contact, ContactNote } from "../types";
 import { AppointmentsThisWeekWidget } from "./AppointmentsThisWeekWidget";
 import { DashboardActivityLog } from "./DashboardActivityLog";
 import { DashboardStepper } from "./DashboardStepper";
+import { UpcomingConsultationsWidget } from "./UpcomingConsultationsWidget";
 import { VaccinationsDueWidget } from "./VaccinationsDueWidget";
 import { Welcome } from "./Welcome";
 import MobileHeader from "../layout/MobileHeader";
@@ -87,6 +88,7 @@ export const MobileDashboard = () => {
         {import.meta.env.VITE_IS_DEMO === "true" ? <Welcome /> : null}
         <VaccinationsDueWidget />
         <AppointmentsThisWeekWidget />
+        <UpcomingConsultationsWidget />
         <DashboardActivityLog />
       </div>
     </Wrapper>

@@ -4,6 +4,7 @@ import type { Contact, ContactNote } from "../types";
 import { AppointmentsThisWeekWidget } from "./AppointmentsThisWeekWidget";
 import { DashboardActivityLog } from "./DashboardActivityLog";
 import { DashboardStepper } from "./DashboardStepper";
+import { UpcomingConsultationsWidget } from "./UpcomingConsultationsWidget";
 import { VaccinationsDueWidget } from "./VaccinationsDueWidget";
 import { Welcome } from "./Welcome";
 
@@ -42,6 +43,7 @@ export const Dashboard = () => {
           {import.meta.env.VITE_IS_DEMO === "true" ? <Welcome /> : null}
           <VaccinationsDueWidget />
           <AppointmentsThisWeekWidget />
+          <UpcomingConsultationsWidget />
         </div>
       </div>
       <div className="md:col-span-8">

@@ -352,6 +352,11 @@ export const frenchCrmMessages = {
         empty: "Aucun rendez-vous prévu cette semaine",
         appointment_on: "Rendez-vous le %{date}",
       },
+      upcoming_consultations: {
+        title: "Consultations à venir",
+        empty: "Aucune consultation à venir",
+        appointment_on: "Le %{date}",
+      },
     },
     header: {
       import_data: "Importer des données",
