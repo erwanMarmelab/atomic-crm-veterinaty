@@ -7,6 +7,7 @@ import { Link } from "react-router";
 import { TopToolbar } from "../layout/TopToolbar";
 import type { Animal } from "../types";
 
+
 /**
  * List page for animals. Shows all animal patients.
  */
@@ -22,8 +23,7 @@ export const AnimalList = () => (
 );
 
 const AnimalListLayout = () => {
-  const { data, isPending } = useListContext<Animal>();
-  const translate = useTranslate();
+  const { isPending } = useListContext<Animal>();
 
   if (isPending) return null;
 

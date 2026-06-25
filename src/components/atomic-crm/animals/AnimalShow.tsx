@@ -6,11 +6,9 @@ import {
 } from "ra-core";
 import { EditButton } from "@/components/admin/edit-button";
 import { ReferenceField } from "@/components/admin/reference-field";
-import { TextField } from "@/components/admin/text-field";
 import { DateField } from "@/components/admin/date-field";
 import { NumberField } from "@/components/admin/number-field";
 import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "react-router";
 
 import type { Animal } from "../types";
 import { AsideSection } from "../misc/AsideSection";
