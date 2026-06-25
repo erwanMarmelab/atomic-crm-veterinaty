@@ -8,8 +8,6 @@ import {
 } from "ra-core";
 import type { ShowBaseProps } from "ra-core";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { ReferenceField } from "@/components/admin/reference-field";
-import { TextField } from "@/components/admin/text-field";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -19,19 +17,17 @@ import { Link } from "react-router";
 
 import MobileHeader from "../layout/MobileHeader";
 import { MobileContent } from "../layout/MobileContent";
-import { CompanyAvatar } from "../companies/CompanyAvatar";
 import { NoteCreate, NotesIterator, NotesIteratorMobile } from "../notes";
 import { NoteCreateSheet } from "../notes/NoteCreateSheet";
-import { TagsListEdit } from "./TagsListEdit";
 import { ContactEditSheet } from "./ContactEditSheet";
 import { ContactStatusSelector } from "./ContactInputs";
 import { ContactPersonalInfo } from "./ContactPersonalInfo";
 import { ContactBackgroundInfo } from "./ContactBackgroundInfo";
-import { ContactTasksList } from "./ContactTasksList";
 import type { Contact } from "../types";
 import { Avatar } from "./Avatar";
 import { ContactAside } from "./ContactAside";
 import { MobileBackButton } from "../misc/MobileBackButton";
+import { ContactAnimalsList } from "./ContactAnimalsList";
 
 export const ContactShow = (props: ShowBaseProps = {}) => {
   const isMobile = useIsMobile();
@@ -61,11 +57,9 @@ const ContactShowContentMobile = () => {
   const [editOpen, setEditOpen] = useState(false);
   if (isPending || !record) return null;
 
-  const taskCount = record.nb_tasks ?? 0;
-
   return (
     <>
-      {/* We need to repeat the note creation sheet here to support the note 
+      {/* We need to repeat the note creation sheet here to support the note
       create button that is rendered when there are no notes. */}
       <NoteCreateSheet
         open={noteCreateOpen}
@@ -103,45 +97,19 @@ const ContactShowContentMobile = () => {
               <h2 className="text-2xl font-bold">
                 <RecordRepresentation />
               </h2>
-              <div className="text-sm text-muted-foreground">
-                {record.title && record.company_id != null
-                  ? `${translate("resources.contacts.position_at", {
-                      title: record.title,
-                    })} `
-                  : record.title}
-                {record.company_id != null && (
-                  <ReferenceField
-                    source="company_id"
-                    reference="companies"
-                    link="show"
-                  >
-                    <TextField source="name" className="underline" />
-                  </ReferenceField>
-                )}
-              </div>
-            </div>
-            <div>
-              <ReferenceField
-                source="company_id"
-                reference="companies"
-                link="show"
-                className="no-underline"
-              >
-                <CompanyAvatar />
-              </ReferenceField>
+              {record.title && (
+                <div className="text-sm text-muted-foreground">
+                  {record.title}
+                </div>
+              )}
             </div>
           </div>
         </div>
 
         <Tabs defaultValue="notes" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 h-10">
+          <TabsList className="grid w-full grid-cols-2 h-10">
             <TabsTrigger value="notes">
               {translate("resources.notes.name", { smart_count: 2 })}
-            </TabsTrigger>
-            <TabsTrigger value="tasks">
-              {translate("crm.common.task_count", {
-                smart_count: taskCount ?? 0,
-              })}
             </TabsTrigger>
             <TabsTrigger value="details">
               {translate("crm.common.details")}
@@ -181,10 +149,6 @@ const ContactShowContentMobile = () => {
             </InfiniteListBase>
           </TabsContent>
 
-          <TabsContent value="tasks" className="mt-4">
-            <ContactTasksList />
-          </TabsContent>
-
           <TabsContent value="details" className="mt-4">
             <div className="space-y-6">
               <div>
@@ -218,15 +182,6 @@ const ContactShowContentMobile = () => {
                   <ContactBackgroundInfo />
                 </div>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold">
-                  {translate("resources.tags.name", { smart_count: 2 })}
-                </h3>
-                <Separator />
-                <div className="mt-3">
-                  <TagsListEdit />
-                </div>
-              </div>
             </div>
           </TabsContent>
         </Tabs>
@@ -236,7 +191,6 @@ const ContactShowContentMobile = () => {
 };
 
 const ContactShowContent = () => {
-  const translate = useTranslate();
   const { record, isPending } = useShowContext<Contact>();
   if (isPending || !record) return null;
 
@@ -251,33 +205,11 @@ const ContactShowContent = () => {
                 <h5 className="text-xl font-semibold">
                   <RecordRepresentation />
                 </h5>
-                <div className="inline-flex text-sm text-muted-foreground">
-                  {record.title && record.company_id != null
-                    ? `${translate("resources.contacts.position_at", {
-                        title: record.title,
-                      })} `
-                    : record.title}
-                  {record.company_id != null && (
-                    <ReferenceField
-                      source="company_id"
-                      reference="companies"
-                      link="show"
-                    >
-                      &nbsp;
-                      <TextField source="name" />
-                    </ReferenceField>
-                  )}
-                </div>
-              </div>
-              <div>
-                <ReferenceField
-                  source="company_id"
-                  reference="companies"
-                  link="show"
-                  className="no-underline"
-                >
-                  <CompanyAvatar />
-                </ReferenceField>
+                {record.title && (
+                  <div className="inline-flex text-sm text-muted-foreground">
+                    {record.title}
+                  </div>
+                )}
               </div>
             </div>
             <InfiniteListBase
@@ -297,6 +229,7 @@ const ContactShowContent = () => {
         </Card>
       </div>
       <ContactAside />
+      <ContactAnimalsList />
     </div>
   );
 };

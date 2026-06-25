@@ -10,7 +10,6 @@ import { Link } from "react-router";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ContactCreateSheet } from "../contacts/ContactCreateSheet";
-import { ContactImportButton } from "../contacts/ContactImportButton";
 import useAppBarHeight from "../misc/useAppBarHeight";
 import { NoteCreateSheet } from "../notes/NoteCreateSheet";
 
@@ -52,10 +51,10 @@ export const DashboardStepper = ({
                 })}
               </h3>
               <div className="w-[150px]">
-                <Progress value={(step / 3) * 100} className="mb-2" />
+                <Progress value={(step / 2) * 100} className="mb-2" />
                 <div className="text-right text-sm">
                   {translate("crm.dashboard.stepper.progress", {
-                    _: `${step}/3 done`,
+                    _: `${step}/2 done`,
                     step,
                   })}
                 </div>
@@ -97,13 +96,10 @@ export const DashboardStepper = ({
                         })}
                       </Button>
                     ) : (
-                      <>
-                        <CreateButton
-                          label="resources.contacts.action.new"
-                          resource="contacts"
-                        />
-                        <ContactImportButton />
-                      </>
+                      <CreateButton
+                        label="resources.contacts.action.new"
+                        resource="contacts"
+                      />
                     )}
                   </div>
                 </div>

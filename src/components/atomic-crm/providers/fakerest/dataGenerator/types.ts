@@ -1,23 +1,19 @@
 import type {
-  Company,
+  Animal,
+  Consultation,
   Contact,
   ContactNote,
-  Deal,
-  DealNote,
   Sale,
-  Tag,
-  Task,
+  Vaccination,
 } from "../../../types";
 import type { ConfigurationContextValue } from "../../../root/ConfigurationContext";
 
 export interface Db {
-  companies: Company[];
+  animals: Animal[];
+  consultations: Consultation[];
   contacts: Contact[];
   contact_notes: ContactNote[];
-  deals: Deal[];
-  deal_notes: DealNote[];
   sales: Sale[];
-  tags: Tag[];
-  tasks: Task[];
+  vaccinations: Vaccination[];
   configuration: Array<{ id: number; config: ConfigurationContextValue }>;
 }

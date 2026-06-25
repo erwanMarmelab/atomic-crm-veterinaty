@@ -39,17 +39,21 @@ const frenchCatalog = mergeTranslations(
   frenchCrmMessages,
 );
 
+/**
+ * Returns the initial locale for the CRM.
+ * Defaults to French for veterinary practice; falls back to English for non-French browsers.
+ */
 export const getInitialLocale = (): "en" | "fr" => {
   if (typeof navigator === "undefined") {
-    return "en";
-  }
-
-  const browserLocale = navigator.languages?.[0] ?? navigator.language;
-  if (browserLocale?.toLowerCase().startsWith("fr")) {
     return "fr";
   }
 
-  return "en";
+  const browserLocale = navigator.languages?.[0] ?? navigator.language;
+  if (browserLocale?.toLowerCase().startsWith("en")) {
+    return "en";
+  }
+
+  return "fr";
 };
 
 export const i18nProvider = polyglotI18nProvider(

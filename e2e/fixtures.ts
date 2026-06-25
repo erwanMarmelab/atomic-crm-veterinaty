@@ -9,13 +9,11 @@ const adminSupabase = createClient(
 
 // Tables in FK-safe deletion order (children before parents)
 const TABLES = [
-  "tasks",
+  "vaccinations",
+  "consultations",
   "contact_notes",
-  "deal_notes",
-  "deals",
+  "animals",
   "contacts",
-  "companies",
-  "tags",
   "favicons_excluded_domains",
   "configuration",
   "sales",
@@ -120,21 +118,28 @@ async function createNotes({
   }
 }
 
-async function createCompany({
+async function createAnimal({
   name,
-  salesId,
+  species,
+  owner_id,
 }: {
   name: string;
-  salesId: string | number;
+  species: string;
+  owner_id: string | number;
 }) {
   const { data, error } = await adminSupabase
-    .from("companies")
-    .insert({ name, sales_id: salesId })
+    .from("animals")
+    .insert({
+      name,
+      species,
+      status: "active",
+      owner_id,
+    })
     .select("id")
     .single();
 
   if (error) {
-    throw new Error(`Failed to create company: ${error.message}`);
+    throw new Error(`Failed to create animal: ${error.message}`);
   }
 
   return data;
@@ -144,14 +149,12 @@ async function createContact({
   first_name,
   last_name,
   title = "",
-  company_id = null,
   sales_id,
   notes = [],
 }: {
   first_name: string;
   last_name: string;
   title?: string;
-  company_id?: string | number | null;
   sales_id: string | number;
   notes?: {
     text: string;
@@ -165,12 +168,10 @@ async function createContact({
       first_name,
       last_name,
       title,
-      company_id,
       sales_id,
       first_seen: new Date().toISOString(),
       last_seen: new Date().toISOString(),
       has_newsletter: false,
-      tags: [],
       gender: "unknown",
       status: "cold",
       background: "",
@@ -189,6 +190,64 @@ async function createContact({
     salesId: sales_id,
     notes,
   });
+
+  return data;
+}
+
+async function createVaccination({
+  animal_id,
+  vaccine_name,
+  administered_on,
+  validity_months,
+}: {
+  animal_id: string | number;
+  vaccine_name: string;
+  administered_on: string;
+  validity_months: number;
+}) {
+  const { data, error } = await adminSupabase
+    .from("vaccinations")
+    .insert({
+      animal_id,
+      vaccine_name,
+      administered_on,
+      validity_months,
+    })
+    .select("id")
+    .single();
+
+  if (error) {
+    throw new Error(`Failed to create vaccination: ${error.message}`);
+  }
+
+  return data;
+}
+
+async function createConsultation({
+  animal_id,
+  date,
+  reason,
+  next_appointment,
+}: {
+  animal_id: string | number;
+  date: string;
+  reason: string;
+  next_appointment?: string | null;
+}) {
+  const { data, error } = await adminSupabase
+    .from("consultations")
+    .insert({
+      animal_id,
+      date,
+      reason,
+      next_appointment: next_appointment ?? null,
+    })
+    .select("id")
+    .single();
+
+  if (error) {
+    throw new Error(`Failed to create consultation: ${error.message}`);
+  }
 
   return data;
 }
@@ -215,8 +274,10 @@ export const test = base.extend<{
   resetDb: void;
   createUser: typeof createUser;
   createSales: typeof createSales;
-  createCompany: typeof createCompany;
   createContact: typeof createContact;
+  createAnimal: typeof createAnimal;
+  createVaccination: typeof createVaccination;
+  createConsultation: typeof createConsultation;
   createNotes: typeof createNotes;
   menu: ReturnType<typeof getMenuMethod>;
   dismissToast: (content: string) => Promise<void>;
@@ -240,12 +301,20 @@ export const test = base.extend<{
     await cb(createSales);
   },
   // eslint-disable-next-line no-empty-pattern
-  createCompany: async ({}, cb) => {
-    await cb(createCompany);
-  },
-  // eslint-disable-next-line no-empty-pattern
   createContact: async ({}, cb) => {
     await cb(createContact);
+  },
+  // eslint-disable-next-line no-empty-pattern
+  createAnimal: async ({}, cb) => {
+    await cb(createAnimal);
+  },
+  // eslint-disable-next-line no-empty-pattern
+  createVaccination: async ({}, cb) => {
+    await cb(createVaccination);
+  },
+  // eslint-disable-next-line no-empty-pattern
+  createConsultation: async ({}, cb) => {
+    await cb(createConsultation);
   },
   // eslint-disable-next-line no-empty-pattern
   createNotes: async ({}, cb) => {

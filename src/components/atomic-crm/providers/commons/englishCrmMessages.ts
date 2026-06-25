@@ -1,64 +1,95 @@
 export const englishCrmMessages = {
   resources: {
-    companies: {
-      name: "Company |||| Companies",
-      forcedCaseName: "Company",
-      fields: {
-        name: "Company name",
-        website: "Website",
-        linkedin_url: "LinkedIn URL",
-        phone_number: "Phone number",
-        created_at: "Created at",
-        nb_contacts: "Number of contacts",
-        revenue: "Revenue",
-        sector: "Sector",
-        size: "Size",
-        tax_identifier: "Tax Identifier",
-        address: "Address",
-        city: "City",
-        zipcode: "Zip code",
-        state_abbr: "State",
-        country: "Country",
-        description: "Description",
-        context_links: "Context links",
-        sales_id: "Account manager",
-      },
-      empty: {
-        description: "It seems your company list is empty.",
-        title: "No companies found",
-      },
+    vaccinations: {
+      name: "Vaccination |||| Vaccinations",
+      forcedCaseName: "Vaccination",
+      months: "months",
       field_categories: {
-        contact: "Contact",
-        additional_info: "Additional information",
-        address: "Address",
-        context: "Context",
+        details: "Vaccination details",
+      },
+      fields: {
+        vaccine_name: "Vaccine name",
+        administered_on: "Administered on",
+        validity_months: "Validity (months)",
+        expires_on: "Expires on",
+        animal_id: "Animal",
+      },
+      expiry_status: {
+        valid: "Valid",
+        expiring_soon: "Expiring soon",
+        expired: "Expired",
       },
       action: {
-        create: "Create Company",
-        edit: "Edit company",
-        new: "New Company",
-        show: "Show company",
+        add: "Add vaccination",
+        create: "Create vaccination",
+        edit: "Edit vaccination",
+        new: "New vaccination",
+        show: "Show vaccination",
       },
-      added_on: "Added on %{date}",
-      followed_by: "Followed by %{name}",
-      followed_by_you: "Followed by you",
-      no_contacts: "No contact",
-      nb_contacts: "%{smart_count} contact |||| %{smart_count} contacts",
-      nb_deals: "%{smart_count} deal |||| %{smart_count} deals",
-      sizes: {
-        one_employee: "1 employee",
-        two_to_nine_employees: "2-9 employees",
-        ten_to_forty_nine_employees: "10-49 employees",
-        fifty_to_two_hundred_forty_nine_employees: "50-249 employees",
-        two_hundred_fifty_or_more_employees: "250 or more employees",
+      empty: {
+        title: "No vaccinations yet",
       },
-      autocomplete: {
-        create_error: "An error occurred while creating the company",
-        create_item: "Create %{item}",
-        create_label: "Start typing to create a new company",
+    },
+    consultations: {
+      name: "Consultation |||| Consultations",
+      forcedCaseName: "Consultation",
+      title: "Visit on %{date}",
+      field_categories: {
+        details: "Visit details",
+        attachments: "Attachments",
       },
-      filters: {
-        only_mine: "Only companies I manage",
+      fields: {
+        date: "Date",
+        reason: "Reason",
+        diagnosis: "Diagnosis",
+        treatment: "Treatment",
+        next_appointment: "Next appointment",
+        attachments: "Attachments",
+        animal_id: "Animal",
+      },
+      action: {
+        add: "Add consultation",
+        create: "Create consultation",
+        edit: "Edit consultation",
+        new: "New consultation",
+        show: "Show consultation",
+      },
+      empty: {
+        title: "No consultations yet",
+      },
+    },
+    animals: {
+      name: "Animal |||| Animals",
+      forcedCaseName: "Animal",
+      field_categories: {
+        identity: "Identity",
+        medical: "Medical info",
+        owner: "Owner",
+      },
+      fields: {
+        name: "Name",
+        species: "Species",
+        breed: "Breed",
+        date_of_birth: "Date of birth",
+        weight_kg: "Weight (kg)",
+        microchip_number: "Microchip number",
+        status: "Status",
+        owner_id: "Owner",
+      },
+      status: {
+        active: "Active",
+        deceased: "Deceased",
+        lost: "Lost",
+      },
+      action: {
+        add: "Add animal",
+        create: "Create animal",
+        edit: "Edit animal",
+        new: "New animal",
+        show: "Show animal",
+      },
+      empty: {
+        title: "No animals found",
       },
     },
     contacts: {
@@ -76,7 +107,6 @@ export const englishCrmMessages = {
         last_name: "Last name",
         last_seen: "Last seen",
         title: "Title",
-        company_id: "Company",
         email_jsonb: "Email addresses",
         email: "Email",
         phone_jsonb: "Phone numbers",
@@ -91,7 +121,6 @@ export const englishCrmMessages = {
         add_first: "Add your first contact",
         create: "Create contact",
         edit: "Edit contact",
-        export_vcard: "Export to vCard",
         new: "New Contact",
         show: "Show contact",
       },
@@ -141,20 +170,6 @@ export const englishCrmMessages = {
       list: {
         error_loading: "Error loading contacts",
       },
-      bulk_tag: {
-        action: "Tag",
-        back: "Back to tags",
-        create_description:
-          "Create a new tag and apply it to the selected contacts.",
-        description:
-          "Choose an existing tag or create a new one for the selected contacts.",
-        empty: "No tags yet. Create one to tag the selected contacts.",
-        error: "Failed to add tag to contacts",
-        noop: "Selected contacts already have this tag",
-        success:
-          "Tag added to %{smart_count} contact |||| Tag added to %{smart_count} contacts",
-        title: "Add tag to contacts",
-      },
       merge: {
         action: "Merge with another contact",
         confirm: "Merge Contacts",
@@ -177,11 +192,9 @@ export const englishCrmMessages = {
         before_this_month: "Before this month",
         before_this_week: "Before this week",
         managed_by_me: "Managed by me",
-        search: "Search name, company...",
+        search: "Search name...",
         this_week: "This week",
         today: "Today",
-        tags: "Tags",
-        tasks: "Tasks",
       },
       hot: {
         empty_change_status:
@@ -189,50 +202,6 @@ export const englishCrmMessages = {
         empty_hint: 'Contacts with a "hot" status will appear here.',
         title: "Hot Contacts",
       },
-    },
-    deals: {
-      name: "Deal |||| Deals",
-      fields: {
-        name: "Name",
-        description: "Description",
-        company_id: "Company",
-        contact_ids: "Contacts",
-        category: "Category",
-        amount: "Budget",
-        expected_closing_date: "Expected closing date",
-        stage: "Stage",
-      },
-      action: {
-        back_to_deal: "Back to deal",
-        create: "Create deal",
-        new: "New Deal",
-      },
-      field_categories: {
-        misc: "Misc",
-      },
-      archived: {
-        action: "Archive",
-        error: "Error: deal not archived",
-        list_title: "Archived Deals",
-        success: "Deal archived",
-        title: "Archived Deal",
-        view: "View archived deals",
-      },
-      inputs: {
-        linked_to: "Linked to",
-      },
-      unarchived: {
-        action: "Send back to the board",
-        error: "Error: deal not unarchived",
-        success: "Deal unarchived",
-      },
-      updated: "Deal updated",
-      empty: {
-        before_create: "before creating a deal.",
-        description: "It seems your deal list is empty.",
-        title: "No deals found",
-      },
-      invalid_date: "Invalid date",
     },
     notes: {
       name: "Note |||| Notes",
@@ -242,7 +211,6 @@ export const englishCrmMessages = {
         date: "Date",
         attachments: "Attachments",
         contact_id: "Contact",
-        deal_id: "Deal",
       },
       action: {
         add: "Add note",
@@ -308,63 +276,6 @@ export const englishCrmMessages = {
         new: "New user",
       },
     },
-    tasks: {
-      name: "Task |||| Tasks",
-      forcedCaseName: "Task",
-      fields: {
-        text: "Description",
-        due_date: "Due date",
-        type: "Type",
-        contact_id: "Contact",
-        due_short: "due",
-      },
-      action: {
-        add: "Add task",
-        create: "Create task",
-        edit: "Edit task",
-      },
-      actions: {
-        postpone_next_week: "Postpone to next week",
-        postpone_tomorrow: "Postpone to tomorrow",
-        title: "task actions",
-      },
-      added: "Task added",
-      deleted: "Task deleted successfully",
-      dialog: {
-        create: "Create task",
-        create_for: "Create task for %{name}",
-      },
-      sheet: {
-        edit: "Edit task",
-        edit_for: "Edit task for %{name}",
-      },
-      empty: "No tasks yet",
-      empty_list_hint: "Tasks added to your contacts will appear here.",
-      filters: {
-        later: "Later",
-        overdue: "Overdue",
-        this_week: "This week",
-        today: "Today",
-        tomorrow: "Tomorrow",
-        with_pending: "With pending tasks",
-      },
-      regarding_contact: "(Re: %{name})",
-      updated: "Task updated",
-    },
-    tags: {
-      name: "Tag |||| Tags",
-      action: {
-        add: "Add tag",
-        create: "Create new tag",
-      },
-      dialog: {
-        color: "Color",
-        create_title: "Create a new tag",
-        edit_title: "Edit tag",
-        name_label: "Tag name",
-        name_placeholder: "Enter tag name",
-      },
-    },
   },
   crm: {
     action: {
@@ -404,39 +315,38 @@ export const englishCrmMessages = {
       copy: "Copy",
       loading: "Loading...",
       me: "Me",
-      task_count: "%{smart_count} task |||| %{smart_count} tasks",
     },
     changelog: {
       title: "Changelog",
     },
     activity: {
-      added_company: "%{name} added company",
-      you_added_company: "You added company",
       added_contact: "%{name} added",
       you_added_contact: "You added",
       added_note: "%{name} added a note about",
       you_added_note: "You added a note about",
-      added_note_about_deal: "%{name} added a note about deal",
-      you_added_note_about_deal: "You added a note about deal",
-      added_deal: "%{name} added deal",
-      you_added_deal: "You added deal",
-      at_company: "at",
       to: "to",
       load_more: "Load more activity",
     },
     dashboard: {
-      deals_chart: "Upcoming Deal Revenue",
-      deals_pipeline: "Deals Pipeline",
       latest_activity: "Latest Activity",
       latest_activity_error: "Error loading latest activity",
       latest_notes: "My Latest Notes",
       latest_notes_added_ago: "added %{timeAgo}",
       stepper: {
         install: "Install Atomic CRM",
-        progress: "%{step}/3 done",
+        progress: "%{step}/2 done",
         whats_next: "What's next?",
       },
-      upcoming_tasks: "Upcoming Tasks",
+      vaccinations_due: {
+        title: "Vaccinations Due (next 30 days)",
+        empty: "No vaccinations due in the next 30 days",
+        expires_on: "Expires %{date}",
+      },
+      appointments_this_week: {
+        title: "Appointments This Week",
+        empty: "No appointments scheduled this week",
+        appointment_on: "Appointment on %{date}",
+      },
     },
     header: {
       import_data: "Import data",
@@ -458,8 +368,7 @@ export const englishCrmMessages = {
         unable: "Unable to import this file.",
       },
       idle: {
-        description_1:
-          "You can import sales, companies, contacts, companies, notes, and tasks.",
+        description_1: "You can import sales, contacts, and notes.",
         description_2:
           "Data must be in a JSON file matching the following sample:",
       },
@@ -477,18 +386,7 @@ export const englishCrmMessages = {
     },
     settings: {
       about: "About",
-      companies: {
-        sectors: "Sectors",
-      },
       dark_mode_logo: "Dark Mode Logo",
-      deals: {
-        categories: "Categories",
-        currency: "Currency",
-        pipeline_help:
-          "Select which deal stages should count as pipeline deals.",
-        pipeline_statuses: "Pipeline Statuses",
-        stages: "Stages",
-      },
       light_mode_logo: "Light Mode Logo",
       notes: {
         statuses: "Statuses",
@@ -497,24 +395,11 @@ export const englishCrmMessages = {
       save_error: "Failed to save configuration",
       saved: "Configuration saved successfully",
       saving: "Saving...",
-      tasks: {
-        types: "Types",
-      },
       preferences: "Preferences",
       title: "Settings",
       app_title: "App Title",
       sections: {
         branding: "Branding",
-      },
-      validation: {
-        duplicate: "Duplicate %{display_name}: %{items}",
-        in_use:
-          "Cannot remove %{display_name} that are still used by deals: %{items}",
-        validating: "Validating\u2026",
-        entities: {
-          categories: "categories",
-          stages: "stages",
-        },
       },
     },
     theme: {

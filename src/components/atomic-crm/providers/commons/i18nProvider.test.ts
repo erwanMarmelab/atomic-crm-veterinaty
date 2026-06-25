@@ -40,8 +40,8 @@ describe("i18nProvider", () => {
   it("translates recently added fr crm keys", async () => {
     await i18nProvider.changeLocale("fr");
 
-    expect(i18nProvider.translate("resources.deals.empty.title")).toBe(
-      "Aucune affaire trouvée",
+    expect(i18nProvider.translate("resources.notes.empty")).toBe(
+      "Aucune note pour l'instant",
     );
   });
 
@@ -54,12 +54,13 @@ describe("i18nProvider", () => {
     expect(getInitialLocale()).toBe("fr");
   });
 
-  it("falls back to english when browser locale is unsupported", () => {
+  it("defaults to french when browser locale is neither english nor french", () => {
     vi.stubGlobal("navigator", {
       language: "es-ES",
       languages: ["es-ES", "pt-BR"],
     });
 
-    expect(getInitialLocale()).toBe("en");
+    // Vet CRM defaults to French; only explicit English browsers get English.
+    expect(getInitialLocale()).toBe("fr");
   });
 });

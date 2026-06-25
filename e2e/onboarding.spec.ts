@@ -14,7 +14,7 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
   await page.getByRole("button", { name: "Create account" }).click();
 
   await expect(page.getByText("What's next?")).toBeVisible();
-  await expect(page.getByText("1/3 done")).toBeVisible();
+  await expect(page.getByText("1/2 done")).toBeVisible();
   await expect(page.getByText("Install Atomic CRM")).toBeVisible();
   await expect(page.getByText("Add your first contact")).toBeVisible();
   await expect(page.getByText("Add your first note")).toBeVisible();
@@ -24,14 +24,11 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
   await page.getByLabel("She/Her").click();
   await page.getByLabel("First name").fill("Jane");
   await page.getByLabel("Last name").fill("Smith");
-  await page.getByLabel("Title").fill("CEO");
-  await page.getByLabel("Company").click();
-  await page.getByPlaceholder("Search").fill("Smith Corp");
-  await page.getByText("Create Smith Corp").click();
+  await page.getByLabel("Title").fill("Veterinarian");
   await page
     .getByRole("group", { name: "Email addresses" })
     .getByRole("textbox", { name: "Email" })
-    .fill("jane@smithcorp.com");
+    .fill("jane@smithclinic.com");
   await page
     .getByRole("group", { name: "Email addresses" })
     .getByRole("button", { name: "Add" })
@@ -63,12 +60,12 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
   await dismissToast("Element created");
 
   await expect(page.locator(isMobile ? "h2" : "h5")).toHaveText("Jane Smith");
-  await expect(page.getByText("CEO at Smith Corp")).toBeVisible();
+  await expect(page.getByText("Veterinarian")).toBeVisible();
 
   await menu.goToDashboard();
   await page.waitForLoadState("networkidle");
 
-  await expect(page.getByText("2/3 done")).toBeVisible();
+  await expect(page.getByText("2/2 done")).toBeVisible();
 
   await page.getByRole("button", { name: "Add note" }).click();
 
@@ -93,11 +90,7 @@ test("user onboarding", async ({ page, isMobile, menu, dismissToast }) => {
   await expect(page.getByText("Latest Activity")).toBeVisible();
   await expect(
     page.getByText("Latest Activity").locator("xpath=../.."),
-  ).toHaveText(/You added company Smith Corp today at/);
-
-  await expect(
-    page.getByText("Latest Activity").locator("xpath=../.."),
-  ).toHaveText(/You added Jane Smith to Smith Corp today at/);
+  ).toHaveText(/You added Jane Smith today at/);
 
   await expect(
     page.getByText("Latest Activity").locator("xpath=../.."),
