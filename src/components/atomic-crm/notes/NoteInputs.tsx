@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useFormContext, useWatch } from "react-hook-form";
 
-import type { ContactNote, DealNote } from "../types";
+import type { ContactNote } from "../types";
 import { Status } from "../misc/Status";
 import { useConfigurationContext } from "../root/ConfigurationContext";
 import { getCurrentDate } from "./utils";
@@ -27,16 +27,14 @@ export const NoteInputs = ({
   defaultStatus?: string;
   showStatus?: boolean;
   selectReference?: boolean;
-  reference?: "contacts" | "deals";
+  reference?: "contacts";
 }) => {
   const { noteStatuses } = useConfigurationContext();
   const translate = useTranslate();
   const [displayMore, setDisplayMore] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { control, formState, setValue } = useFormContext<
-    ContactNote | DealNote
-  >();
+  const { control, formState, setValue } = useFormContext<ContactNote>();
   const selectedContactId = useWatch({ control, name: "contact_id" });
   const selectedStatus = useWatch({ control, name: "status" });
   const textValue = useWatch({ control, name: "text" as any });
@@ -51,22 +49,19 @@ export const NoteInputs = ({
     }
   }, [textValue]);
   const shouldHydrateStatus =
-    showStatus &&
-    (defaultStatus !== undefined ||
-      (reference === "contacts" && Boolean(selectReference)));
+    showStatus && (defaultStatus !== undefined || Boolean(selectReference));
   const { data: selectedContact } = useGetOne(
     "contacts",
     { id: selectedContactId! },
     {
       enabled:
         shouldHydrateStatus &&
-        reference === "contacts" &&
         Boolean(selectReference) &&
         selectedContactId != null,
     },
   );
   const resolvedDefaultStatus = shouldHydrateStatus
-    ? reference === "contacts" && selectReference
+    ? selectReference
       ? selectedContact?.status
       : defaultStatus
     : undefined;
@@ -116,14 +111,8 @@ export const NoteInputs = ({
           reference={reference}
         >
           <AutocompleteInput
-            label={
-              reference === "contacts"
-                ? "resources.notes.fields.contact_id"
-                : "resources.notes.fields.deal_id"
-            }
-            optionText={
-              reference === "contacts" ? contactOptionText : undefined
-            }
+            label="resources.notes.fields.contact_id"
+            optionText={contactOptionText}
             helperText={false}
             validate={required()}
             modal
