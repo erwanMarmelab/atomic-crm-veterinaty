@@ -56,11 +56,7 @@ const VaccinationListContent = () => {
   );
 };
 
-const VaccinationListItem = ({
-  vaccination,
-}: {
-  vaccination: Vaccination;
-}) => {
+const VaccinationListItem = ({ vaccination }: { vaccination: Vaccination }) => {
   const translate = useTranslate();
   const expiryStatus = getExpiryStatus(vaccination.expires_on);
   const statusLabel = translate(
@@ -90,7 +86,9 @@ const VaccinationListItem = ({
           {new Date(vaccination.administered_on).toLocaleDateString()}
         </div>
       </div>
-      <div className={`text-sm ml-4 font-medium ${statusClassMap[expiryStatus]}`}>
+      <div
+        className={`text-sm ml-4 font-medium ${statusClassMap[expiryStatus]}`}
+      >
         {statusLabel}
       </div>
     </Link>

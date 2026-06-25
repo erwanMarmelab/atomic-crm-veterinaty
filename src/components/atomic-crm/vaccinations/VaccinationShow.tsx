@@ -102,8 +102,10 @@ const ExpiryBadge = ({
 
   const classMap: Record<typeof status, string> = {
     expired: "bg-destructive/10 text-destructive",
-    expiring_soon: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400",
-    valid: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
+    expiring_soon:
+      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400",
+    valid:
+      "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
   };
 
   return (
