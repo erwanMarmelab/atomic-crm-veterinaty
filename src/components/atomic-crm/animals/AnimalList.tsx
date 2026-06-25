@@ -1,11 +1,14 @@
 import { useListContext, useTranslate } from "ra-core";
 import { CreateButton } from "@/components/admin/create-button";
 import { List } from "@/components/admin/list";
+import { SearchInput } from "@/components/admin/search-input";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router";
 
 import { TopToolbar } from "../layout/TopToolbar";
 import type { Animal } from "../types";
+
+const animalFilters = [<SearchInput source="name@ilike" alwaysOn />];
 
 /**
  * List page for animals. Shows all animal patients.
@@ -14,6 +17,7 @@ export const AnimalList = () => (
   <List
     title={false}
     actions={<AnimalListActions />}
+    filters={animalFilters}
     perPage={25}
     sort={{ field: "name", order: "ASC" }}
   >
