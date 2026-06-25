@@ -1,9 +1,9 @@
 import type { ConfigurationContextValue } from "./ConfigurationContext";
 
-export const defaultDarkModeLogo = "./logos/logo_atomic_crm_dark.svg";
-export const defaultLightModeLogo = "./logos/logo_atomic_crm_light.svg";
+export const defaultDarkModeLogo = "./logos/logo_vet_crm_dark.svg";
+export const defaultLightModeLogo = "./logos/logo_vet_crm_light.svg";
 
-export const defaultTitle = "Atomic CRM";
+export const defaultTitle = "Vet CRM";
 
 export const defaultNoteStatuses = [
   { value: "cold", label: "Cold", color: "#7dbde8" },
